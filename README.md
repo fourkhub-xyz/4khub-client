@@ -17,7 +17,7 @@
 
 - 下载python3安装包：[https://www.python.org/downloads/](https://www.python.org/downloads/)
 - 查看是否安装成功：`python3 -V` 显示已经安装python版本
-- 命令行执行安装最新依赖包：`pip3 install -r requirements.txt`
+- 命令行执行安装最新依赖包：`pip3 install -r https://raw.githubusercontent.com/fourkhub-xyz/4khub-client/main/requirements.txt`
 
 
 **安装配套工具**：
