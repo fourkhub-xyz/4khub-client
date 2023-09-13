@@ -1,6 +1,6 @@
 # [https://www.4khub.xyz](https://www.4khub.xyz/) website client
 
-[4khub-client](https://www.4khub.xyz/)是 `www.4khub.xyz`网站客户端；所有最新资源，VIP资源都在客户端发布，原网站只做部分资源展示，不再更新资源。
+[4khub-client](https://www.4khub.xyz/)是 `www.4khub.xyz`网站客户端；所有最新资源，VIP资源都在客户端发布，原网站只做部分资源展示，不再更新资源。客户端更有海量电影电视库提供方便搜索，下载，资源搜刮整理，消息通知，豆瓣订阅等功能。
 
 ---
 
