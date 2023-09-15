@@ -30,4 +30,5 @@
 - Windows：客户端目录下命令行执行：`python3 client_main.py`；或者直接双击`run.bat`执行
 - Linux：客户端目录下命令行执行：`python3 client_main.py`；
 
-### 后期会推出windows一键安装包，以及docker容器
+### 首推docker容器化安装
+[https://hub.docker.com/r/4khubxyz/4khub-client](https://hub.docker.com/r/4khubxyz/4khub-client)
