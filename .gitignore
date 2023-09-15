@@ -1,0 +1,14 @@
+__pycache__
+*.sock
+*.log
+*.pid
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+out/
+gen/
+flask_session/
+build-client/
+tests/
