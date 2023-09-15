@@ -5,6 +5,9 @@
 ---
 
 ## 如何使用
+### 首推docker容器化安装
+[https://hub.docker.com/r/4khubxyz/4khub-client](https://hub.docker.com/r/4khubxyz/4khub-client)
+
 
 **下载**：下载对应系统的软件包。
 
@@ -30,5 +33,4 @@
 - Windows：客户端目录下命令行执行：`python3 client_main.py`；或者直接双击`run.bat`执行
 - Linux：客户端目录下命令行执行：`python3 client_main.py`；
 
-### 首推docker容器化安装
-[https://hub.docker.com/r/4khubxyz/4khub-client](https://hub.docker.com/r/4khubxyz/4khub-client)
+
