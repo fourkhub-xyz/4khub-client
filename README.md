@@ -9,7 +9,7 @@
 [https://hub.docker.com/r/4khubxyz/4khub-client](https://hub.docker.com/r/4khubxyz/4khub-client)
 
 
-### 安装包安装方法（会有系统依赖，需自行安装缺失的依赖软件）
+### 安装包安装方法（会有系统依赖，需自行安装系统缺失的依赖软件）
 **下载**：下载对应系统的软件包。
 
 - Windows：`4khub-client_x86_64_windows.zip`
