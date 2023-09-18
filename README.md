@@ -1,6 +1,7 @@
 # [https://www.4khub.xyz](https://www.4khub.xyz/) website client
 
-[4khub-client](https://www.4khub.xyz/)是 `www.4khub.xyz`网站客户端；所有最新资源，VIP资源都在客户端发布，原网站只做部分资源展示，不再更新资源。客户端更有海量电影电视库提供方便搜索，下载，资源搜刮整理，消息通知，豆瓣订阅等功能。
+[4khub-client](https://www.4khub.xyz/)是 `www.4khub.xyz`网站客户端，也是个人影视库；所有最新资源，VIP资源都在客户端发布，原网站只做部分资源展示，不再更新资源。客户端更有海量电影电视库提供方便搜索，下载，资源搜刮整理，消息通知，豆瓣订阅等功能。打造专属个人影视库。
+
 
 ---
 
@@ -34,4 +35,28 @@
 - Windows：客户端目录下命令行执行：`python3 client_main.py`；或者直接双击`run.bat`执行
 - Linux：客户端目录下命令行执行：`python3 client_main.py`；
 
+
+
+## 功能简介：
+
+
+### 1、资源检索和订阅下载
+* 站点RSS聚合，想看的加入订阅，资源自动实时追新。
+* 通过微信、Telegram、Slack、Synology Chat或者WEB界面聚合资源搜索下载，最新热门资源一键搜索或者订阅。
+* 与豆瓣联动，在豆瓣中标记想看后台自动检索下载，未出全的自动加入订阅。
+
+### 2、媒体库整理
+* 监控下载软件，下载完成后自动识别真实名称，硬链接到媒体库并重命名。
+* 对目录进行监控，文件变化时自动识别媒体信息硬链接到媒体库并重命名。
+* 解决保种与媒体库整理冲突的问题，专为中文环境优化，支持国产剧集和动漫，重命名准确率高，改名后Emby/Jellyfin/Plex完美刮削海报墙。
+
+### 3、站点养护
+* 全面的站点数据统计，实时监测你的站点流量情况。
+* 全自动化托管养站，支持远程下载器（本工具内建刷流功能仅为日常养站使用，如果追求数据建议使用更加强大的刷流工具：<a href="https://github.com/vertex-app/vertex" target="_blank">Vertex</a>）。
+* 站点每日自动登录保号。
+
+### 4、消息服务
+* 支持微信、Telegram、Slack、Synology Chat、Bark、PushPlus、爱语飞飞等近十种渠道图文消息通知
+* 支持通过微信、Telegram、Slack、Synology Chat远程控制订阅和下载。
+* Emby/Jellyfin/Plex播放状态通知。
 
