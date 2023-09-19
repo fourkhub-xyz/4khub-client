@@ -1,0 +1,259 @@
+{% import 'macro/svg.html' as SVG %}
+<div class="container-xl">
+  <!-- Page title -->
+  <div class="page-header d-print-none">
+    <div class="row align-items-center">
+      <div class="col">
+        <h2 class="page-title">
+          我的订单
+        </h2>
+      </div>
+      <div class="col-auto ms-auto d-print-none">
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 业务页面代码 -->
+<div class="page-body">
+  <div class="container-xl">
+    <div class="row row-cards">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-body border-bottom py-3">
+            <div class="d-flex">
+              <div class="text-muted">
+                共 {{ TotalCount }} 条记录
+              </div>
+              <div class="ms-auto text-muted">
+                搜索:
+                <div class="ms-2 d-inline-block">
+                  <input id="search_word" value="{{ Search }}" type="text" placeholder="Media名称"
+                         class="form-control form-control-sm" aria-label="搜索">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="table-responsive" style="min-height: 300px; overflow-x: scroll"> <!--overflow: hidden-->
+            <table class="table table-vcenter card-table table-hover table-striped">
+              <thead>
+              <tr>
+{#                <th>订单编号</th>#}
+                <th>操作</th>
+                <th>Media名称</th>
+                <th></th>
+                <th>价格</th>
+                <th>折扣</th>
+                <th>订单状态</th>
+                <th>创建时间</th>
+              </tr>
+              </thead>
+              <tbody>
+              {% if TotalCount > 0 %}
+                {% for TmdbCache in TmdbCaches %}
+                  <tr>
+{#                    <td>#}
+{#                      <div class="d-flex py-1 align-items-center">#}
+{#                        <div class="flex-fill">#}
+{#                          <div class="font-weight-medium">{{ TmdbCache.order_trade_no }}</div>#}
+{#                        </div>#}
+{#                      </div>#}
+{#                    </td>#}
+                    <td>
+                      <div class="dropdown">
+                        <a href="#" class="btn-action" data-bs-toggle="dropdown"
+                           aria-expanded="false">
+                          {{ SVG.dots_vertical() }}
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end">
+                            {% if TmdbCache.order_status == 0 %}
+                              <a class="dropdown-item"
+                                 href='javascript:show_modify("{{TmdbCache.product_name}}","{{ TmdbCache.order_trade_no}}")'>
+                                支付
+                              </a>
+                            {% endif %}
+                          <a class="dropdown-item text-danger"
+                             href='javascript:manual_delete("{{TmdbCache.product_name}}","{{ TmdbCache.order_trade_no}}")'>
+                            删除
+                          </a>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div>
+                          {% if TmdbCache.tmdb_id == '' %}
+                              {{ TmdbCache.product_name }}
+                          {% else %}
+                              <a class="ms-1"
+                                 href="https://www.themoviedb.org/movie/{{ TmdbCache.tmdb_id }}"
+                                 target="_blank">
+                                 {{ TmdbCache.product_name }}
+                                {{ SVG.link() }}
+                              </a>
+                          {% endif %}
+                      </div>
+                    </td>
+                  <td>
+                      {% if TmdbCache.poster_image %}
+                        <img class="rounded shadow-sm w-5"
+                            src="{{ TmdbCache.poster_image }}"
+                            onerror="this.src='../static/img/no-image.png'" alt=""
+                            style="min-width: 50px"/>
+                      {% endif %}
+                  </td>
+                    <td>
+                      <div class="text-muted text-nowrap">
+                          <span class="text-yellow">
+                            {{ SVG.coins() }}
+                            {{ TmdbCache.order_price }}
+                          </span>
+                      </div>
+                    </td>
+                    <td>
+                        {{ TmdbCache.order_discount }}
+
+                    </td>
+                    <td>
+                        {% if TmdbCache.order_status == 1 %}
+                            <span class="text-green">
+                                已支付
+                            </span>
+                        {% else %}
+                            <span class="text-red">
+                                待支付
+                            </span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {{ TmdbCache.create_time }}
+
+                    </td>
+
+                  </tr>
+                {% endfor %}
+              {% else %}
+                <tr>
+                  <td colspan="5" align="center">没有数据</td>
+                </tr>
+              {% endif %}
+              </tbody>
+            </table>
+          </div>
+          {% if TotalCount > 0 %}
+            <div class="card-footer d-flex align-items-center">
+              <p class="m-0 text-muted">当前页 <span>{{ Count }}</span> 条</p>
+              <ul class="pagination m-0 ms-auto">
+                <li class="page-item {% if CurrentPage==1 %} disabled {% endif %}">
+                  <a class="page-link" href="javascript:go_pre_page('{{ Search }}', {{ CurrentPage }})"
+                     tabindex="-1" aria-disabled="true">
+                    {{ SVG.chevron_left() }}
+                  </a>
+                </li>
+                {% for page in PageRange %}
+                  <li class="page-item {% if page==CurrentPage %} active {% endif %}">
+                    <a class="page-link"
+                       href="javascript:navmenu('my_orders?s={{ Search }}&page={{ page }}')">{{ page }}</a>
+                  </li>
+                {% endfor %}
+                <li class="page-item {% if CurrentPage >= TotalPage %} disabled {% endif %}">
+                  <a class="page-link"
+                     href="{% if CurrentPage < TotalPage %}javascript:go_next_page('{{ Search }}', {{ CurrentPage }}){% else %}javascript:void(0){% endif %}">
+                    {{ SVG.chevron_right() }}
+                  </a>
+                </li>
+              </ul>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal modal-blur fade" id="tmdb_cache_detail" tabindex="-1" role="dialog" aria-hidden="true"
+     data-bs-backdrop="static" data-bs-keyboard="false">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="tmdb_cache_title">缓存条目</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <pre class="modal-body" id="tmdb_cache_content"
+           style="display:flex; flex-direction:column-reverse;font-size:12px;">
+            </pre>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">取消</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal modal-blur fade" id="modal-tmdbcache-modify" tabindex="-1" role="dialog" aria-hidden="true"
+     data-bs-backdrop="static" data-bs-keyboard="false">
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">修改TMDB缓存</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <label class="form-label required">标题</label>
+          <div class="row mb-3">
+            <input type="hidden" id="tmdbcache_key">
+            <input type="text" value="" id="tmdbcache_title" class="form-control" placeholder="标题">
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-link me-auto" data-bs-dismiss="modal">取消</button>
+        <a href="javascript:modify_title()" id="tmdbcache_modify_btn" class="btn btn-primary">确定</a>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  // 上一页
+  function go_pre_page(search, page) {
+    navmenu("my_orders?s=" + search + "&page=" + (page - 1))
+  }
+
+  // 下一页
+  function go_next_page(search, page) {
+    navmenu("my_orders?s=" + search + "&page=" + (page + 1))
+  }
+
+  // 支付订单
+  function show_modify(title,key) {
+      show_ask_modal("即将支付5金币购买资源 【"+ title + "】 是否确认？", function () {
+      hide_ask_modal();
+      console.log("no:" + key)
+      ajax_post("pay_order", {"order_no": key}, function (ret) {
+          if (ret.code == 1){
+            show_success_modal("支付成功")
+          } else {
+            show_fail_modal("支付失败，非VIP会员或金币不够~")
+          }
+        window_history_refresh();
+      });
+    });
+  }
+
+
+
+  //删除提示
+  function manual_delete(title,key) {
+    show_confirm_modal("【"+ title + "】 将被删除，是否确认？ 已支付的资源删除后下载需再次购买！", function () {
+      hide_confirm_modal();
+      ajax_post("delete_order", {"order_no": key}, function (ret) {
+        window_history_refresh();
+      });
+    });
+  }
+
+  // 搜索按钮
+  $('#search_word').bind('keypress', function (event) {
+    if (event.keyCode == "13") {
+      let keyword = $("#search_word").val();
+      navmenu("my_orders?s=" + keyword);
+    }
+  });
+
+</script>
