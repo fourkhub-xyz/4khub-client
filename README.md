@@ -64,3 +64,7 @@
 * VIP额外提供内网穿透服务，让您随时随地可以方便观看私人影视库的内容和进行管理。
 * 随时随地可以订阅，下载想看的影视内容，随时随地观看电影、电视，支持多端设备，打造真正属于个人的影视库。
 
+
+
+欢迎加入官方Twitter
+[![Twitter URL](https://img.shields.io/twitter/url/https/twitter.com/4khubxyz.svg?style=social&label=Follow%20%404khubxyz)](https://twitter.com/4khubxyz)
