@@ -2430,6 +2430,12 @@
     });
   }
 
+  function vod_play_tst(index,vod_name,vod_id){
+        var url = `/get_vod_play?title=${vod_name}&vod_id=${encodeURIComponent(vod_id)}`
+        url = url + "&index=" + index
+        console.log(url)
+        navmenu(url)
+    }
   //导航点击
   function navmenu(page, newflag=false) {
     if (!newflag) {

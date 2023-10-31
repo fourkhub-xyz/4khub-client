@@ -73,9 +73,14 @@
         </div>
         <div class="invalid-feedback mb-3" id="register_promptmsg" style="display:block">{{ prompt_msg }}</div>
 
-{#        {% if displaynone %} style="display: none;" {% endif %}#}
-        <div {% if err_msg %} class="form-control is-invalid mb-3" {% else %} class="mb-3"  {% endif %}>
-            <div class="h-captcha" data-sitekey="0450b7b5-2edb-4e1e-8c5b-dc84448a3b0b"></div>
+        <div id="h-cf" {% if err_msg %} class="form-control is-invalid mb-3" {% else %} class="mb-3"  {% endif %}>
+            <!--<div class="h-captcha" data-sitekey="0450b7b5-2edb-4e1e-8c5b-dc84448a3b0b"></div>
+            <div class="cf-turnstile" data-sitekey="0x4AAAAAAALk4qxTqVMXENm3"></div>-->
+            {% if use_cf %}
+                <div class="cf-turnstile" data-sitekey="0x4AAAAAAALk4qxTqVMXENm3"></div>
+            {% else %}
+                <div class="h-captcha" data-sitekey="0450b7b5-2edb-4e1e-8c5b-dc84448a3b0b"></div>
+            {% endif %}
         </div>
 
         <label class="form-label">Telegram</label>
@@ -132,7 +137,7 @@
 <script src="../static/js/tabler.min.js"></script>
 <script src="../static/js/demo.min.js"></script>
 <script src="../static/js/jquery-3.3.1.min.js"></script>
-
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 <script>
     function heredoc(fn) {
         return fn.toString().split('\n').slice(1,-1).join('\n') + '\n'

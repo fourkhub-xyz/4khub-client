@@ -1,0 +1,68 @@
+<link rel="stylesheet" href="/static/css/style/DPlayer.min.css">
+<style>
+    .dplayer-logo {
+        pointer-events: none;
+        position: absolute;
+        left: 20px;
+        top: 20px;
+        max-width: 120px;
+        max-height: 50px
+    }
+    .dplayer-menu,
+    .dplayer-mask {
+        display: none !important;
+    }
+</style>
+<div class="container" style="width: 90%; height: 100%; margin: 20px auto">
+        <h3 class="top_title">{{ vod_name }} {% if media_type == 'MOVIE' %} {% else %}第{{ current_index}}集 {% endif %}</h3>
+        <div id="dplayer" style="z-index: 10"></div>
+        <p></p>
+        <div>
+        {% if media_type == 'MOVIE' %}
+        {% else %}
+            {% for i in range(play_count) %}
+                <a href='javascript:vod_play_tst("{{ i }}", "{{vod_name}}", "{{vod_id }}")'><span id="index{{ i }}" class="badge badge-outline {% if loop.index == current_index %}text-bg-orange{% else %}text-orange{% endif %}">第{{ loop.index }}集</span></a>
+            {% endfor %}
+        {% endif %}
+        </div>
+        <p></p>
+        <p><div><span class="badge badge-outline text-blue">资源来源于互联网，字幕及广告非本站推送~</span></div></p>
+        </div>
+
+
+
+
+<script src="/static/js/hls.min.js"></script>
+<script src="/static/js/DPlayer.min.js"></script>
+<script src="/static/js/docute.js"></script>
+<script src="/static/js/config.js"></script>
+<script src="/static/js/docsearch.js"></script>
+<script>
+
+const dp{{ dp_id }}  = new DPlayer({
+    container: document.getElementById('dplayer'),
+    autopaly:true,
+    lang:'zh-cn',
+    preload:'auto',
+    screenshot: false,
+    hotkey:true,
+    contextmenu:[],
+    mutex:true,
+    chromecast:true,
+    airplay:true,
+    logo: '/static/img/logo.png',
+    volume: 0.7,
+    video: {
+        quality: [
+            {% for j in vod_play_list %}
+                {   name: '{{ j.name }}',
+                    url: '{{ j.url }}',
+                    type: 'auto'
+                },
+            {% endfor %}
+            ],
+        defaultQuality: 0
+    }
+});
+</script>
+

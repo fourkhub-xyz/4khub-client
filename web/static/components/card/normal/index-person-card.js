@@ -14,6 +14,7 @@ export class NormalPersonCard extends observeState(CustomElement) {
     subtype: { attribute: "card-subtype" },
     show_sub: '1',
     cnname: { attribute: "card-cnname" },
+      source_person_name:{attribute: "source_person_name" },
     fav: '1',
     date: { attribute: "card-date" },
     vote: { attribute: "card-vote" },
@@ -138,7 +139,7 @@ export class NormalPersonCard extends observeState(CustomElement) {
              style="background-color: rgba(0, 0, 0, 0.5); box-shadow:0 0 0 1px #dddddd;"
              @click=${() => { 
                  //var url = `/recommend?pagefrom=${this.pagefrom}&subtype=person&type=MOV&personid=${this.personid}&title=${this.cnname}&subtitle=参演作品`
-                 var url = `/fourkhub_vip_person_products?pagefrom=${this.pagefrom}&person_cnname=${this.cnname}&person_name=${this.overview}`
+                 var url = `/fourkhub_vip_person_products?pagefrom=${this.pagefrom}&person_cnname=${this.cnname}&person_name=${this.overview}&source_person_name=${this.source_person_name}`
                  console.log(url)
                  navmenu(url)
              }}>

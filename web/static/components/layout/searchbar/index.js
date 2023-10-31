@@ -166,6 +166,19 @@ export class LayoutSearchbar extends CustomElement {
               </a>
             </span>
           </div>
+            <div class="nav-item dropdown me-2">
+                <a href="javascript:navmenu('help')" title="帮助文档" class="nav-link d-flex lh-1 text-reset ms-1 p-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-book" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                       <path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"></path>
+                       <path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"></path>
+                       <path d="M3 6l0 13"></path>
+                       <path d="M12 6l0 13"></path>
+                       <path d="M21 6l0 13"></path>
+                    </svg>
+                </a>
+            </div>
+            
           <!-- 头像 -->
           <div class="nav-item dropdown me-2">
               <a href="#" class="nav-link d-flex lh-1 text-reset ms-1 p-0" data-bs-toggle="dropdown">

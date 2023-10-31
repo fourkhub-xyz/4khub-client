@@ -45,7 +45,7 @@ const navbar_list = [
       },
       // {
       //   name: "更新信息",
-      //   page: "update_my_info",
+      //   page: "update_my_info?method=1",
       //   icon: html`
       //     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-edit" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
       //        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -117,6 +117,16 @@ const navbar_list = [
             <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
             <path d="M3 7m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v9a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z"></path>
             <path d="M16 3l-4 4l-4 -4"></path>
+          </svg>
+        `,
+      },
+      {
+        name: "4KHub在线",
+        page: "fourkhub_vod",
+        icon: html`
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-cloud" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+             <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+             <path d="M6.657 18c-2.572 0 -4.657 -2.007 -4.657 -4.483c0 -2.475 2.085 -4.482 4.657 -4.482c.393 -1.762 1.794 -3.2 3.675 -3.773c1.88 -.572 3.956 -.193 5.444 1c1.488 1.19 2.162 3.007 1.77 4.769h.99c1.913 0 3.464 1.56 3.464 3.486c0 1.927 -1.551 3.487 -3.465 3.487h-11.878"></path>
           </svg>
         `,
       },
@@ -441,6 +451,19 @@ const navbar_list = [
     name: "系统设置",
     also: "设置",
     list: [
+        {
+        name: "用户手册",
+        page: "help",
+        icon: html`
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-book" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                       <path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"></path>
+                       <path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"></path>
+                       <path d="M3 6l0 13"></path>
+                       <path d="M12 6l0 13"></path>
+                       <path d="M21 6l0 13"></path>
+                    </svg>        `,
+      },
       {
         name: "基础设置",
         page: "basic",

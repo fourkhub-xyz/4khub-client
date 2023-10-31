@@ -84,11 +84,73 @@ export class PageDiscovery extends CustomElement {
           subtype :"dbgt",
         }
       ],
+      "4KHUBVOD": [
+        {
+          type: "MOV",
+          title:"最新影视",
+          subtype :"ALLVOD",
+        },
+        {
+          type: "MOV",
+          title:"伦理/情色",
+          subtype :"伦理/情色",
+        },
+        {
+          type: "TV",
+          title:"国产剧",
+          subtype :"国产剧",
+        },
+        {
+          type: "TV",
+          title:"港台剧",
+          subtype :"港台剧",
+        },
+        {
+          type: "TV",
+          title:"欧美剧",
+          subtype :"欧美剧",
+        },
+        {
+          type: "TV",
+          title:"日韩剧",
+          subtype :"日韩剧",
+        },
+        {
+          type: "TV",
+          title:"海外剧",
+          subtype :"海外剧",
+        },
+        {
+          type: "TV",
+          title:"综艺",
+          subtype :"综艺",
+        },
+        {
+          type: "TV",
+          title:"动漫",
+          subtype :"动漫",
+        },
+        {
+          type: "TV",
+          title:"体育",
+          subtype :"体育",
+        },
+        {
+          type: "MOV",
+          title:"纪录片",
+          subtype :"纪录片",
+        }
+      ],
       "4KHUB": [
         {
           type: "MOV",
           title:"最新影视",
           subtype :"newmovie",
+        },
+        {
+          type: "MOV",
+          title:"麻豆傳媒",
+          subtype :"madou",
         },
         {
           type: "MOV",
@@ -112,6 +174,11 @@ export class PageDiscovery extends CustomElement {
         },
         {
           type: "MOV",
+          title:"韩国电影",
+          subtype :"krmovie",
+        },
+        {
+          type: "MOV",
           title:"高清影剧",
           subtype :"hdmovie",
         },
@@ -126,19 +193,9 @@ export class PageDiscovery extends CustomElement {
           subtype :"krtv",
         },
         {
-          type: "MOV",
-          title:"韩国电影",
-          subtype :"krmovie",
-        },
-        {
           type: "TV",
           title:"国产剧",
           subtype :"chinatv",
-        },
-        {
-          type: "MOV",
-          title:"麻豆傳媒",
-          subtype :"madou",
         }
       ],
       "BANGUMI": [
@@ -207,7 +264,8 @@ export class PageDiscovery extends CustomElement {
         ${this._media_type_list[this.discovery_type]?.map((item) => ( html`
           <custom-slide
             slide-title=${item.title}
-            slide-click="javascript:navmenu('recommend?type=${item.type}&subtype=${item.subtype}&week=${item.week ?? ""}&title=${item.title}')"
+            slide-click="javascript:navmenu('recommend?pagefrom=${this.pagefrom}&type=${item.type}&subtype=${item.subtype}&week=${item.week ?? ""}&title=${item.title}')"
+            slide-click2="javascript:navmenu('recommend?pagefrom=${this.pagefrom}&type=${item.type}&subtype=${item.subtype}&week=${item.week ?? ""}&title=${item.title}')"
             lazy="normal-card"
             .slide_card=${this._slide_card_list[item.title]
               ? this._slide_card_list[item.title].map((card, index) => ( html`

@@ -19,7 +19,7 @@ ENV LANG="C.UTF-8" \
     CLIENT_CONFIG="/config/config.yaml" \
     CLIENT_AUTO_UPDATE=true \
     CLIENT_CN_UPDATE=true \
-    CLIENT_VERSION=linux_aarch64 \
+    CLIENT_VERSION=linux_x86_64 \
     PS1="\u@\h:\w \$ " \
     REPO_URL="https://github.com/fourkhub-xyz/4khub-client.git" \
     PYPI_MIRROR="https://pypi.tuna.tsinghua.edu.cn/simple" \
@@ -33,8 +33,9 @@ RUN python_ver=$(python3 -V | awk '{print $2}') \
     && echo 'fs.inotify.max_user_watches=524288' >> /etc/sysctl.conf \
     && echo 'fs.inotify.max_user_instances=524288' >> /etc/sysctl.conf \
     && git config --global pull.ff only \
-    && git clone -b linux_aarch64 ${REPO_URL} ${WORKDIR} --depth=1 --recurse-submodule \
-    && git config --global --add safe.directory ${WORKDIR}
+    && git clone -b linux_x86_64 ${REPO_URL} ${WORKDIR} --depth=1 --recurse-submodule \
+    && git config --global --add safe.directory ${WORKDIR} \
+    && chmod +x /4khub-client/docker/entrypoint.sh
 EXPOSE 3333
 VOLUME ["/config"]
 ENTRYPOINT ["/4khub-client/docker/entrypoint.sh"]
