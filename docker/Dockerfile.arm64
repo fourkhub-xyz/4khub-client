@@ -1,6 +1,7 @@
 FROM python:3.8-alpine
 RUN apk add --no-cache libffi-dev \
     && apk add --no-cache $(echo $(wget --no-check-certificate -qO- https://raw.githubusercontent.com/fourkhub-xyz/4khub-client/main/package_list.txt)) \
+    && apk add libc6-compat \
     && ln -sf /usr/share/zoneinfo/${TZ} /etc/localtime \
     && echo "${TZ}" > /etc/timezone \
     && ln -sf /usr/bin/python3 /usr/bin/python \
