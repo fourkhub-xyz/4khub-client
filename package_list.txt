@@ -15,3 +15,4 @@ chromium-chromedriver
 npm
 dumb-init
 ffmpeg
+libc6-compat
