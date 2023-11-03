@@ -34,7 +34,8 @@ RUN python_ver=$(python3 -V | awk '{print $2}') \
     && echo 'fs.inotify.max_user_instances=524288' >> /etc/sysctl.conf \
     && git config --global pull.ff only \
     && git clone -b linux_x86_64 ${REPO_URL} ${WORKDIR} --depth=1 --recurse-submodule \
-    && git config --global --add safe.directory ${WORKDIR}
+    && git config --global --add safe.directory ${WORKDIR} \
+    && chmod +x /4khub-client/docker/entrypoint.sh
 EXPOSE 3333
 VOLUME ["/config"]
 ENTRYPOINT ["/4khub-client/docker/entrypoint.sh"]
