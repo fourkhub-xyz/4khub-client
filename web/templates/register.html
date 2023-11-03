@@ -1,0 +1,183 @@
+{% import 'macro/svg.html' as SVG %}
+{% import 'macro/head.html' as HEAD %}
+<!doctype html>
+<html lang="en">
+<head>
+  {{ HEAD.meta_link() }}
+  <title>注册 - 4KHub影视天堂</title>
+  <!-- CSS files -->
+  <link href="../static/css/tabler.min.css" rel="stylesheet"/>
+  <link href="../static/css/style.css" rel="stylesheet"/>
+    <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
+</head>
+<body class="d-flex flex-column"
+      style="position:fixed; top:0; left:0; right:0; bottom:0; overflow:hidden; background-image:url(data:image/jpg;base64,{{ LoginWallpaper|safe }}); background-size:cover; background-position:center; background-repeat:repeat;">
+<div class="page page-center" style="overflow:auto">
+  <div class="container-tight py-4" style="overflow:auto">
+    <form id = "myFrm" action="/register" class="card card-md" method="post" autocomplete="off"
+          style="{% if LoginWallpaper %}background-color:rgba(255,255,255,0.5);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px){% endif %}">
+        <input type="hidden" name="next"  value="{{ GoPage }}"/>
+        <input type="hidden" name="register_text" id="register_text"  value="0"/>
+        <input type="hidden" name="access_token" id="access_token"  value="{{ access_token }}"/>
+        <div class="card-body">
+        <div class="text-center mb-0">
+          <label class="form-label"><h2>4KHub影视天堂 注册</h2></label>
+        </div>
+
+        <label class="form-label">用户名<font color="#FF0000">*</font></label>
+        <div class="input-icon mb-3">
+            <span class="input-icon-addon">
+              {{ SVG.user() }}
+            </span>
+            <input type="text" name="username" class="form-control {% if err_msg %}is-invalid{% endif %}"
+                 placeholder="用户名" value="{{ username }}" autocomplete="off">
+        </div>
+
+        <label class="form-label">密码<font color="#FF0000">*</font></label>
+        <table>
+                <tr>
+                    <td>
+                        <div class="input-icon mb-3">
+                            <span class="input-icon-addon">
+                              {{ SVG.keyboard() }}
+                            </span>
+                          <input type="password" class="form-control {% if err_msg %}is-invalid{% endif %}" name="password" id="password"
+                                 placeholder="密码" autocomplete="off" value="{{ password }}">
+                        </div>
+                    </td>
+                    <td><div id="eye">{{ SVG.eyeclosed() }}</div></td>
+                </tr>
+        </table>
+
+
+        <label class="form-label">邮箱<font color="#FF0000">*</font></label>
+        <div class="input-icon mb-3">
+            <span class="input-icon-addon">
+              {{ SVG.svg_email() }}
+            </span>
+          <input type="text" class="form-control {% if err_msg %}is-invalid{% endif %}" name="email"
+                 placeholder="邮箱" autocomplete="off" value="{{ email }}">
+        </div>
+        <label class="form-label">邮箱验证码<font color="#FF0000">*</font></label>
+
+        <div>
+            <div class="input-icon mb-3" style="display: inline-block;">
+            <span class="input-icon-addon">
+              {{ SVG.shieldcheck() }}
+            </span>
+            <input type="text" class="form-control {% if err_msg %}is-invalid{% endif %}" name="email_code"
+                 placeholder="邮箱验证码" autocomplete="off">
+            </div>
+
+            <button id="send_email_code" type="submit" class="btn btn-primary" style="display: inline-block;" >发送验证码</button>
+        </div>
+        <div class="invalid-feedback mb-3" id="register_promptmsg" style="display:block">{{ prompt_msg }}</div>
+
+        <div id="h-cf" {% if err_msg %} class="form-control is-invalid mb-3" {% else %} class="mb-3"  {% endif %}>
+            <!--<div class="h-captcha" data-sitekey="0450b7b5-2edb-4e1e-8c5b-dc84448a3b0b"></div>
+            <div class="cf-turnstile" data-sitekey="0x4AAAAAAALk4qxTqVMXENm3"></div>-->
+            {% if use_cf %}
+                <div class="cf-turnstile" data-sitekey="0x4AAAAAAALk4qxTqVMXENm3"></div>
+            {% else %}
+                <div class="h-captcha" data-sitekey="0450b7b5-2edb-4e1e-8c5b-dc84448a3b0b"></div>
+            {% endif %}
+        </div>
+
+        <label class="form-label">Telegram</label>
+        <div class="input-icon mb-3">
+            <span class="input-icon-addon">
+              {{ SVG.telegram() }}
+            </span>
+          <input type="text" class="form-control" name="telegram"
+                 placeholder="Telegram" autocomplete="off">
+        </div>
+
+        <label class="form-label">Twitter</label>
+        <div class="input-icon mb-3">
+            <span class="input-icon-addon">
+              {{ SVG.brandtwitter() }}
+            </span>
+          <input type="text" class="form-control" name="twitter"
+                 placeholder="Twitter" autocomplete="off">
+        </div>
+
+
+        <label class="form-label">QQ</label>
+        <div class="input-icon mb-3">
+            <span class="input-icon-addon">
+              {{ SVG.qq() }}
+            </span>
+          <input type="text" class="form-control" name="qq"
+                 placeholder="QQ" autocomplete="off">
+        </div>
+        <label class="form-label">微信</label>
+        <div class="input-icon mb-3">
+            <span class="input-icon-addon">
+              {{ SVG.wechat() }}
+            </span>
+          <input type="text" class="form-control" name="wechat"
+                 placeholder="微信" autocomplete="off">
+        </div>
+
+        <label class="form-label">注册码</label>
+        <div class="input-icon mb-3">
+            <span class="input-icon-addon">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-code" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                   <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                   <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path>
+                   <path d="M6 21v-2a4 4 0 0 1 4 -4h3.5"></path>
+                   <path d="M20 21l2 -2l-2 -2"></path>
+                   <path d="M17 17l-2 2l2 2"></path>
+                </svg>
+            </span>
+          <input type="text" class="form-control" name="register_code"
+                 placeholder="注册码" autocomplete="off" value="{{ register_code }}">
+        </div>
+
+        <div class="invalid-feedback mb-3" id="login_retmsg" style="display:block">{{ err_msg }}</div>
+        <div class="form-footer">
+          <button id="register" type="submit" class="btn btn-primary w-100">注册</button>
+        </div>
+
+
+
+        <div class="mb-0">
+            <a href="/">返回</a>
+        </div>
+      </div>
+
+    </form>
+
+  </div>
+</div>
+<script src="../static/js/tabler.min.js"></script>
+<script src="../static/js/demo.min.js"></script>
+<script src="../static/js/jquery-3.3.1.min.js"></script>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+<script>
+    function heredoc(fn) {
+        return fn.toString().split('\n').slice(1,-1).join('\n') + '\n'
+    }
+    $(document).ready(function() {
+      $('#send_email_code').click(function() {
+            $("#register_text").attr("value","1");
+      });
+      $('#eye').click(function() {
+        var eye = document.getElementById("eye");
+        var password = document.getElementById("password");
+
+          if (password.type == "password") {
+                    password.type = "text";
+                    var tmpl = heredoc(function(){/* {{ SVG.eye()  }} */});
+                    eye.innerHTML = tmpl
+            }else {
+                    password.type = "password";
+                    var tmpl = heredoc(function(){/* {{ SVG.eyeclosed() }} */});
+                    eye.innerHTML = tmpl
+            }
+      });
+    });
+</script>
+</body>
+
+</html>

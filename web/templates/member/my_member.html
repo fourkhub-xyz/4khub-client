@@ -1,0 +1,113 @@
+{% import 'macro/svg.html' as SVG %}
+{% import 'macro/oops.html' as OOPS %}
+<div class="container-xl">
+  <div class="page-header d-print-none">
+    <div class="row align-items-center">
+      <div class="col">
+        <h2 class="page-title">
+          我的会员
+        </h2>
+      </div>
+      <div class="col-auto ms-auto d-print-none">
+
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="page-body">
+    <div class="container-xl">
+      <div class="row row-deck row-cards">
+        <div class="col-12 col-md-6 col-lg-0">
+          <div class="card">
+              <div class="card-stamp">
+              <div class="card-stamp-icon" style="background-color: transparent">
+                  {% if member_info.vip %}
+                    <img src="../static/img/vip-last.png">
+                  {% else %}
+                    <img src="../static/img/vip-normal.png">
+                  {% endif %}
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="d-flex align-items-center">
+                <div class="subheader">我的会员</div>
+              </div>
+              <div class="d-flex align-items-baseline">
+                <div class="h1 mb-0 me-2">
+                  {% if member_info.vip%}
+                      <span class="text-orange">VIP会员</span>
+                  {% else %}
+                      <span class="text-blue">普通会员</span>
+                  {% endif %}
+                </div>
+                <div class="h4 mb-0 me-2">
+                  {% if member_info.vip %}
+                      <span class="text-green d-inline-flex align-items-center lh-1">
+                        过期时间：{{ member_info.expire_date }}
+                      </span>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+            <div id="chart-movie-bg" class="chart-sm"></div>
+          </div>
+        </div>
+        <div class="col-12 col-md-6 col-lg-0">
+          <div class="card">
+              <div class="card-stamp">
+              <div class="card-stamp-icon" style="background-color: transparent">
+                <img src="../static/img/coin.png">
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="d-flex align-items-center">
+                <div class="subheader">我的金币</div>
+              </div>
+              <div class="d-flex align-items-baseline">
+                  <div class="h1 mb-3 me-2"><span class="text-yellow">{{ member_info.gold_coin_num }}</span></div>
+                <div class="me-auto">
+                <span class="text-green d-inline-flex align-items-center lh-1">
+
+                </span>
+                </div>
+              </div>
+            </div>
+            <div id="chart-tv-bg" class="chart-sm"></div>
+          </div>
+        </div>
+        {% if Count > 0 %}
+            <div class="d-grid gap-3 grid-normal-card">
+        {% for Attr in Items%}
+          <a class="card card-link-pop rounded-3 p-0"
+             href='javascript:show_product_modal("{{ Attr.product_id }}")'>
+            <div class="text-center" style="overflow:hidden">
+              <custom-img img-class="rounded-top w-100"
+                          {% if Attr.product_type_value == 'VIP' %}
+                          img-src="../static/img/vip-last.png"
+                          {% else %}
+                          img-src="../static/img/coin.png"
+                          {% endif %}
+                          img-ratio="60%"
+                          img-style="border-top-left-radius:var(--tblr-border-radius-lg) !important; border-top-right-radius:var(--tblr-border-radius-lg) !important; object-fit:cover;"
+              ></custom-img>
+            </div>
+            <div class="card-body text-center">
+              <div class="card-title mb-1 text-truncate">
+                {{ Attr.product_name }}
+                  <span class="text-orange d-inline-flex align-items-center lh-1">
+                  ￥{{ Attr.product_discount_price }}
+                </span>
+              </div>
+            </div>
+          </a>
+        {% endfor %}
+      </div>
+        {% else %}
+            {{ OOPS.nodatafound('没有商品', '当前没有商品，请稍候刷新试试') }}
+        {% endif %}
+      </div>
+
+    </div>
+  </div>
+

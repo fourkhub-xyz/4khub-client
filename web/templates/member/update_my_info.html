@@ -1,0 +1,286 @@
+{% import 'macro/svg.html' as SVG %}
+{% import 'macro/oops.html' as OOPS %}
+<div class="container-xl">
+    <div class="page-header d-print-none">
+        <div class="row align-items-center">
+            <div class="col">
+                <h2 class="page-title">
+                    更新信息 - 用户名：{{ username }}
+                </h2>
+            </div>
+            <div class="col-auto ms-auto d-print-none">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="page-body">
+
+    <div class="container-xl">
+
+        <div class="row row-deck row-cards">
+            <div class="col-12 col-md-6 col-lg-0">
+                <div class="card">
+                    <div class="card-stamp">
+                        <div class="card-stamp-icon" style="background-color: transparent">
+                            <img src="../static/img/password.png">
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <div class="subheader">修改密码</div>
+                        </div>
+                        <div class="d-flex align-items-baseline">
+
+                            <form id="myFrm" action="/update_my_info" class="" method="post" autocomplete="off"
+                                  style="{% if LoginWallpaper %}background-color:rgba(255,255,255,0.5);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px){% endif %}">
+                                <input type="hidden" name="next" value="{{ GoPage }}"/>
+                                <input type="hidden" name="register_text" id="register_text" value="0"/>
+                                <input type="hidden" name="access_token" id="access_token" value="{{ access_token }}"/>
+                                <div class="card-body">
+
+                                    <label class="form-label">邮箱验证码<font color="#FF0000">*</font></label>
+
+                                    <div>
+                                        <div class="input-icon mb-3" style="display: inline-block;">
+                                            <span class="input-icon-addon">
+                                              {{ SVG.shieldcheck() }}
+                                            </span>
+                                            <input type="text"
+                                                   class="form-control {% if err_msg %}is-invalid{% endif %}"
+                                                   name="email_code"
+                                                   placeholder="邮箱验证码" autocomplete="off">
+                                        </div>
+
+                                        <button id="change_password_send_email_code" type="submit" class="btn btn-primary"
+                                                style="display: inline-block;">发送验证码
+                                        </button>
+                                    </div>
+                                    <div class="invalid-feedback mb-3" id="register_promptmsg"
+                                         style="display:block">{{ prompt_msg }}</div>
+
+                                    <div {% if err_msg %} class="form-control is-invalid mb-3" {% else %} class="mb-3" {% endif %}>
+
+                                        <div class="cf-turnstile" data-sitekey="0x4AAAAAAALk4qxTqVMXENm3"></div>
+                                    </div>
+
+                                    <label class="form-label">原密码<font color="#FF0000">*</font></label>
+                                    <div class="input-icon mb-3">
+                                        <span class="input-icon-addon">
+                                          {{ SVG.user() }}
+                                        </span>
+                                        <input type="password" name="old_password"
+                                               class="form-control {% if err_msg %}is-invalid{% endif %}"
+                                               placeholder="原密码" value="" autocomplete="off">
+                                    </div>
+
+                                    <label class="form-label">新密码<font color="#FF0000">*</font></label>
+                                    <div>
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <div class="input-icon mb-3">
+                                                        <span class="input-icon-addon">
+                                                            {{ SVG.keyboard() }}
+                                                        </span>
+                                                        <input type="password"
+                                                               class="form-control {% if err_msg %}is-invalid{% endif %}"
+                                                               id="password" name="password"
+                                                               placeholder="新密码" autocomplete="off"
+                                                               value="{{ password }}">
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div id="eye">
+                                                        {{ SVG.eyeclosed() }}
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+
+                                    <div class="invalid-feedback mb-3" id="login_retmsg"
+                                         style="display:block">{{ err_msg }}</div>
+                                    <div class="form-footer">
+                                        <button id="register" type="submit" class="btn btn-primary w-100">修改密码</button>
+                                    </div>
+
+
+                                </div>
+
+                            </form>
+
+
+                        </div>
+                    </div>
+                    <div id="chart-movie-bg" class="chart-sm"></div>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-0">
+                <div class="card">
+                    <div class="card-stamp">
+                        <div class="card-stamp-icon" style="background-color: transparent">
+                            <img src="../static/img/mailbox.png">
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <div class="subheader">更新邮箱</div>
+                        </div>
+                        <div class="d-flex align-items-baseline">
+
+                            <form id="myFrm" action="/update_my_info" class="" method="post" autocomplete="off"
+                                  style="{% if LoginWallpaper %}background-color:rgba(255,255,255,0.5);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px){% endif %}">
+                                <input type="hidden" name="next" value="{{ GoPage }}"/>
+                                <input type="hidden" name="register_text" id="register_text" value="1"/>
+                                <input type="hidden" name="access_token" id="access_token" value="{{ access_token }}"/>
+                                <div class="card-body">
+
+
+                                    <label class="form-label">原邮箱<font color="#FF0000">*</font></label>
+                                    <div class="input-icon mb-3">
+                                        <span class="input-icon-addon">
+                                          {{ SVG.svg_email() }}
+                                        </span>
+                                        <input type="text" class="form-control" disabled
+                                               name="email"
+                                               placeholder="邮箱" autocomplete="off" value="{{ email }}">
+                                    </div>
+                                    <label class="form-label">邮箱验证码<font color="#FF0000">*</font></label>
+
+                                    <div>
+                                        <div class="input-icon mb-3" style="display: inline-block;">
+                                            <span class="input-icon-addon">
+                                              {{ SVG.shieldcheck() }}
+                                            </span>
+                                            <input type="text"
+                                                   class="form-control {% if err_msg %}is-invalid{% endif %}"
+                                                   name="email_code"
+                                                   placeholder="邮箱验证码" autocomplete="off">
+                                        </div>
+
+                                        <button id="send_email_code" type="submit" class="btn btn-primary"
+                                                style="display: inline-block;">发送验证码
+                                        </button>
+                                    </div>
+                                    <div class="invalid-feedback mb-3" id="register_promptmsg"
+                                         style="display:block">{{ prompt_msg }}</div>
+
+                                    <div {% if err_msg %} class="form-control is-invalid mb-3" {% else %}
+                                                          class="mb-3"  {% endif %}>
+                                        <div class="h-captcha"
+                                             data-sitekey="0450b7b5-2edb-4e1e-8c5b-dc84448a3b0b"></div>
+                                    </div>
+
+                                    <label class="form-label">新邮箱<font color="#FF0000">*</font></label>
+                                    <div class="input-icon mb-3">
+                                        <span class="input-icon-addon">
+                                          {{ SVG.svg_email() }}
+                                        </span>
+                                        <input type="text" class="form-control {% if err_msg %}is-invalid{% endif %}"
+                                               name="email"
+                                               placeholder="邮箱" autocomplete="off" value="{{ email }}">
+                                    </div>
+                                    <!-- 新邮箱也需要验证有效性，能正确收到邮件 -->
+                                    <label class="form-label">新邮箱验证码<font color="#FF0000">*</font></label>
+                                    <div>
+                                        <div class="input-icon mb-3" style="display: inline-block;">
+                                            <span class="input-icon-addon">
+                                              {{ SVG.shieldcheck() }}
+                                            </span>
+                                            <input type="text"
+                                                   class="form-control {% if err_msg %}is-invalid{% endif %}"
+                                                   name="email_code"
+                                                   placeholder="新邮箱验证码" autocomplete="off">
+                                        </div>
+
+                                        <button id="send_email_code" type="submit" class="btn btn-primary"
+                                                style="display: inline-block;">发送验证码
+                                        </button>
+                                    </div>
+
+                                    <div class="invalid-feedback mb-3" id="login_retmsg"
+                                         style="display:block">{{ err_msg }}</div>
+                                    <div class="form-footer">
+                                        <button id="register" type="submit" class="btn btn-primary w-100">更新邮箱</button>
+                                    </div>
+
+
+                                </div>
+
+                            </form>
+
+
+                        </div>
+                    </div>
+                    <div id="chart-tv-bg" class="chart-sm"></div>
+                </div>
+            </div>
+        </div>
+
+        <br/>
+
+        <div class="row row-deck row-cards">
+
+        </div>
+
+        <br/>
+
+        <div class="row row-deck row-cards">
+            <div class="col-12 col-md-12 col-lg-0">
+                <div class="card">
+                    <div class="card-stamp">
+                        <div class="card-stamp-icon" style="background-color: transparent">
+                            <img src="../static/img/token.png">
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <div class="subheader">更新API token</div>
+                        </div>
+                        <div class="d-flex align-items-baseline">
+                            <div class="h1 mb-3 me-2"><span class="text-yellow">3333</span></div>
+                            <div class="me-auto">
+                <span class="text-green d-inline-flex align-items-center lh-1">
+
+                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="chart-tv-bg" class="chart-sm"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<script>
+    function heredoc(fn) {
+        return fn.toString().split('\n').slice(1,-1).join('\n') + '\n'
+    }
+    $(document).ready(function() {// 点击“全选”复选框
+      $('#send_email_code').click(function() {
+            $("#register_text").attr("value","1");
+      });
+
+      $('#eye').click(function() {
+        var eye = document.getElementById("eye");
+        var password = document.getElementById("password");
+
+          if (password.type == "password") {
+                    password.type = "text";
+                    var tmpl = heredoc(function(){/* {{ SVG.eye()  }} */});
+                    eye.innerHTML = tmpl
+            }else {
+                    password.type = "password";
+                    var tmpl = heredoc(function(){/* {{ SVG.eyeclosed() }} */});
+                    eye.innerHTML = tmpl
+            }
+      });
+    });
+</script>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
