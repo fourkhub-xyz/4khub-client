@@ -14,6 +14,7 @@
 
 - Windows：`4khub-client_x86_64_windows.zip`
 - Linux：`4khub-client_x86_64_linux.zip`
+- 下载地址：[https://download.4khub.xyz/](https://download.4khub.xyz/) 用户名：admin 密码：admin
 
 **解压**：unzip解压软件包到具体目录下。
 
