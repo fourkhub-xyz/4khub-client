@@ -118,6 +118,22 @@
           <input type="text" class="form-control" name="wechat"
                  placeholder="微信" autocomplete="off">
         </div>
+
+        <label class="form-label">注册码</label>
+        <div class="input-icon mb-3">
+            <span class="input-icon-addon">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-code" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                   <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                   <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path>
+                   <path d="M6 21v-2a4 4 0 0 1 4 -4h3.5"></path>
+                   <path d="M20 21l2 -2l-2 -2"></path>
+                   <path d="M17 17l-2 2l2 2"></path>
+                </svg>
+            </span>
+          <input type="text" class="form-control" name="register_code"
+                 placeholder="注册码" autocomplete="off" value="{{ register_code }}">
+        </div>
+
         <div class="invalid-feedback mb-3" id="login_retmsg" style="display:block">{{ err_msg }}</div>
         <div class="form-footer">
           <button id="register" type="submit" class="btn btn-primary w-100">注册</button>
