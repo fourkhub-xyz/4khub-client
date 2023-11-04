@@ -10,6 +10,14 @@
       </div>
       <div class="col-auto ms-auto d-print-none">
         <div class="btn-list">
+            <a title='换一批' href="javascript:refresh()" class="media-slide-right btn  btn-icon btn-link border-0 text-muted }">
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-refresh" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                 <path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4"></path>
+                 <path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4"></path>
+              </svg>
+            </a>
+
           {{ FORM.gen_recommend_filter_dropdown(FilterConf, Params) }}
         </div>
       </div>
@@ -28,7 +36,9 @@
   CurrentPage = {{ CurrentPage or 1 }};
   //页面来源
   PageFrom = '{{ PageFrom }}';
+  Refresh = '{{ refresh }}';
   person_name = '{{ person_name or '' }}'
+  source_person_name = '{{ source_person_name or '' }}'
   person_cnname = '{{ person_cnname or ''}}'
   // 类型
   // MOV/TV/BANGUMI/SEARCH/DOWNLOADED/TRENDING/DISCOVER/DOUBANTAG
@@ -107,7 +117,9 @@
       "params": Params,
       "person_cnname":person_cnname,
       "person_name":person_name,
-      "pagefrom": PageFrom
+        "source_person_name":source_person_name,
+      "pagefrom": PageFrom,
+        "refresh":Refresh
     }, function (ret) {
       if (ret.Items.length > 0) {
         // 记录页码
@@ -184,6 +196,18 @@
       }
   }
 
+  function refresh() {
+      console.log("PageFrom:"+PageFrom+"subtitle:"+SubTitle+"Source:"+Source+"source_person_name:"+source_person_name)
+      if (source_person_name != '' && SubTitle != ''){
+          var url = `/fourkhub_vip_person_products?refresh=true&pagefrom=${PageFrom}&person_cnname=${person_cnname}&person_name=${person_name}&source_person_name=${source_person_name}`
+          console.log(url)
+          navmenu(url)
+      }else {
+          var url = `recommend?refresh=true&type=${Type}&subtype=${SubType}&title=${Title}&subtitle=${SubTitle}&filter=${Filter}&params=${JSON.stringify(Params)}`
+          console.log(url)
+          navmenu(url)
+      }
+  }
 
   // 滚动加载事件
   $(document).ready(function ($) {

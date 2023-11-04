@@ -6,6 +6,7 @@ export class CustomSlide extends CustomElement {
   static properties = {
     slide_title: { attribute: "slide-title" },
     slide_click: { attribute: "slide-click" },
+    slide_click2: { attribute: "slide-click2" },
     lazy: { attribute: "lazy" },
     //slide_scroll: { attribute: "slide-scroll" , reflect: true, type: Number },
     slide_card: { type: Array },
@@ -42,7 +43,7 @@ export class CustomSlide extends CustomElement {
         <div class="page-header d-print-none">
           <div class="d-flex justify-content-between">
             <div class="d-inline-flex">
-              <a class="nav-link ms-2" href=${this.slide_card.length == 0 ? "javascript:void(0)" : this.slide_click}>
+              <a title='查看更多' class="nav-link ms-2" href=${this.slide_card.length == 0 ? "javascript:void(0)" : this.slide_click}>
                 <h2 class="my-1">
                   <strong>${this.slide_card.length == 0 ? "加载中.." : this.slide_title}</strong>
                 </h2>
@@ -52,12 +53,19 @@ export class CustomSlide extends CustomElement {
                     <circle cx="12" cy="12" r="9"></circle>
                     <line x1="15" y1="9" x2="9" y2="15"></line>
                     <polyline points="15 15 15 9 9 9"></polyline>
-                  </svg>
+                  </svg>more...
                 </div>
               </a>
             </div>
             <div ?hidden=${this._disabled ==3 } class="col-auto ms-auto d-print-none">
               <div class="d-inline-flex">
+                <a title='换一批' href=${this.slide_card.length == 0 ? "javascript:void(0)" : this.slide_click2} class="media-slide-right btn  btn-icon btn-link border-0 text-muted }">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-refresh" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                     <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                     <path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4"></path>
+                     <path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4"></path>
+                  </svg>
+                </a>
                 <a class="btn btn-sm btn-icon btn-link text-muted border-0 ${this._disabled == 0 ? "disabled" : ""}"
                    @click=${ () => this._slideNext(false) }>
                   <svg xmlns="http://www.w3.org/2000/svg" class="btn-icon icon-tabler icon-tabler-chevron-left" width="24" height="24"

@@ -14,6 +14,8 @@ export class PageMediainfo extends CustomElement {
     tmdbid: { attribute: "media-tmdbid" },
     // 是否订阅/下载
     fav: {},
+      vod_id:{},
+      vod:{},
     // 媒体信息
     media_info: { type: Object },
     // 类似影片
@@ -38,6 +40,8 @@ export class PageMediainfo extends CustomElement {
           this.media_info = ret.data;
           this.tmdbid = ret.data.tmdbid;
           this.fav = ret.data.fav;
+          this.vod = ret.data.vod;
+          this.vod_id = ret.data.vod_id;
           // 类似
           Golbal.get_cache_or_ajax("get_recommend", "sim", { "type": this.media_type, "subtype": "sim", "tmdbid": ret.data.tmdbid, "page": 1},
             (ret) => {
@@ -199,6 +203,20 @@ export class PageMediainfo extends CustomElement {
                                       添加订阅
                                     </span>`
                                   }
+                                  ${this.vod == "1"
+                                    ? html`
+                                              <span class="btn btn-pill btn-orange" @click=${this._vodClick}>
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-youtube" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                   <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                   <path d="M2 8a4 4 0 0 1 4 -4h12a4 4 0 0 1 4 4v8a4 4 0 0 1 -4 4h-12a4 4 0 0 1 -4 -4v-8z"></path>
+                                                   <path d="M10 9l5 3l-5 3z"></path>
+                                                </svg>在线观看
+                                              </span>
+                                    `
+                                    :html `
+                                          `
+                                    }
+                                  ${console.log("vod_id"+ this.vod_id +"pagefrom:"+this.pagefrom+ "vod_play："+this.vod)}
                               `
                         }
                       
@@ -394,29 +412,11 @@ export class PageMediainfo extends CustomElement {
             fav = "1";
             this._update_fav_data();
           },pagefrom,fourkhub_id);
-      // if (pagefrom === '4KHUBVIP'){
-      //
-      //     ajax_post("check_is_vip", {}, function (ret) {
-      //         if (ret.is_vip) {
-      //           e.stopPropagation();
-      //           Golbal.lit_love_click(title, year, media_type, tmdbid, fav,
-      //             () => {
-      //               fav = "0";
-      //               this._update_fav_data();
-      //             },
-      //             () => {
-      //               fav = "1";
-      //               this._update_fav_data();
-      //             });
-      //         } else {
-      //           show_fail_modal( " VIP会员资源，请至 会员中心-我的会员 购买VIP！");
-      //         }
-      //     });
-      // }else{
-      //
-      // }
-
-
+  }
+  _vodClick(e){
+      var url = `/get_vod_play?media_type=${this.media_type}&title=${this.media_info.title}&pagefrom=${this.pagefrom}&vod_id=${encodeURIComponent(this.vod_id)}`
+      console.log(url)
+      navmenu(url)
   }
 
 

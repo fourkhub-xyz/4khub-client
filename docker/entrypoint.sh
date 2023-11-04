@@ -17,11 +17,11 @@ if [ "${CLIENT_AUTO_UPDATE}" = "true" ]; then
     git remote set-url origin "${REPO_URL}" &> /dev/null
     echo "windows/" > .gitignore
     if [ "${CLIENT_VERSION}" == "linux_x86_64" ]; then
-      	branch="linux_x86_64"
+        branch="linux_x86_64"
     elif [ "${CLIENT_VERSION}" == "linux_armv7"  ]; then
         branch="linux_armv7"
     else
-     	branch="linux_aarch64"
+        branch="linux_aarch64"
     fi
     git clean -dffx
     git fetch --depth 1 origin ${branch}

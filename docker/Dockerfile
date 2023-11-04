@@ -1,5 +1,5 @@
 FROM python:3.8-alpine
-RUN apk update && apk add --no-cache libffi-dev \
+RUN apk add --no-cache libffi-dev \
     && apk add --no-cache $(echo $(wget --no-check-certificate -qO- https://raw.githubusercontent.com/fourkhub-xyz/4khub-client/main/package_list.txt)) \
     && ln -sf /usr/share/zoneinfo/${TZ} /etc/localtime \
     && echo "${TZ}" > /etc/timezone \
@@ -19,7 +19,7 @@ ENV LANG="C.UTF-8" \
     CLIENT_CONFIG="/config/config.yaml" \
     CLIENT_AUTO_UPDATE=true \
     CLIENT_CN_UPDATE=true \
-    CLIENT_VERSION=linux_armv7 \
+    CLIENT_VERSION=linux_x86_64 \
     PS1="\u@\h:\w \$ " \
     REPO_URL="https://github.com/fourkhub-xyz/4khub-client.git" \
     PYPI_MIRROR="https://pypi.tuna.tsinghua.edu.cn/simple" \
@@ -33,7 +33,7 @@ RUN python_ver=$(python3 -V | awk '{print $2}') \
     && echo 'fs.inotify.max_user_watches=524288' >> /etc/sysctl.conf \
     && echo 'fs.inotify.max_user_instances=524288' >> /etc/sysctl.conf \
     && git config --global pull.ff only \
-    && git clone -b linux_armv7 ${REPO_URL} ${WORKDIR} --depth=1 --recurse-submodule \
+    && git clone -b linux_x86_64 ${REPO_URL} ${WORKDIR} --depth=1 --recurse-submodule \
     && git config --global --add safe.directory ${WORKDIR}
 EXPOSE 3333
 VOLUME ["/config"]

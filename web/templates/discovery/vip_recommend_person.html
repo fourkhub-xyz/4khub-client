@@ -10,6 +10,13 @@
       </div>
       <div class="col-auto ms-auto d-print-none">
         <div class="btn-list">
+            <a title='换一批' href="javascript:person_refresh()" class="media-slide-right btn  btn-icon btn-link border-0 text-muted }">
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-refresh" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                 <path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4"></path>
+                 <path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4"></path>
+              </svg>
+            </a>
           {{ FORM.gen_recommend_filter_dropdown(FilterConf, Params) }}
         </div>
       </div>
@@ -59,7 +66,7 @@
 
   // 关键字
   Keyword = '{{ Keyword or "" }}';
-
+ Refresh = '{{ refresh }}'
   // 来源
   Source = '{{ Source or "" }}';
 
@@ -102,7 +109,8 @@
       "keyword": Keyword,
       "source": Source,
       "params": Params,
-      "pagefrom": PageFrom
+      "pagefrom": PageFrom,
+        "refresh":Refresh
     }, function (ret) {
       if (ret.Items.length > 0) {
         // 记录页码
@@ -135,6 +143,7 @@
                       card-vote="${item.vote}"
                       card-year="${item.year}"
                       card-cnname="${item.cnname}"
+                      source_person_name="${item.source_person_name}"
                       card-overview="${item.name}"
                       card-restype="${item.media_type}"
                       card-date="${item.date}"
@@ -150,6 +159,10 @@
     });
   }
 
+    function person_refresh() {
+        navmenu(`recommend_person?refresh=true&pagefrom=${PageFrom}&type=${Type}&subtype=${SubType}&title=${Title}&subtitle=${SubTitle}&filter=${Filter}&params=${JSON.stringify(Params)}`)
+        //navmenu(`recommend?refresh=true&type=${Type}&subtype=${SubType}&title=${Title}&subtitle=${SubTitle}&filter=${Filter}&params=${JSON.stringify(Params)}`)
+      }
 
   // 如果没有滚动条则继续加载
   function loading_data_max() {
