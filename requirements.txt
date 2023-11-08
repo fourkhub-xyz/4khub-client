@@ -46,4 +46,5 @@ anitopy==2.1.1
 plexapi==4.15.1
 slack-bolt==1.18.0
 passlib==1.7.4
+wxPython==4.2.1
 
