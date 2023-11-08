@@ -34,7 +34,7 @@ export class PageMediainfo extends CustomElement {
 
   firstUpdated() {
     // 媒体信息、演员阵容
-    Golbal.get_cache_or_ajax("media_detail", "info", { "type": this.media_type, "tmdbid": this.tmdbid, "subtype": this.subtype},
+    Golbal.get_cache_or_ajax("media_detail", "info", { "type": this.media_type, "tmdbid": this.tmdbid, "subtype": this.subtype,"fourkhub_id":this.fourkhub_id},
       (ret) => {
         if (ret.code === 0) {
           this.media_info = ret.data;
