@@ -1,0 +1,75 @@
+<div class="container-xl">
+    <div class="page-header d-print-none">
+        <div class="row align-items-center">
+            <div class="col">
+                <h2 class="page-title">
+                    我的推广
+                </h2>
+            </div>
+            <div class="col-auto ms-auto d-print-none">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="page-body">
+
+    <div class="container-xl">
+
+        <div class="row row-deck row-cards">
+            <div class="col-12 col-md-12 col-lg-0">
+                <div class="card">
+                    <div class="card-stamp">
+                        <div class="card-stamp-icon" style="background-color: transparent">
+                            <img src="../static/img/users.png">
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <div class="subheader">推广链接</div>
+                        </div>
+                        <div class="d-flex align-items-baseline">
+                            <div class="h3 mb-3 me-2"><span class="text-yellow">https://www.4khub.xyz/register?register_code={{ promotion_code }}</span></div>
+                            <button id="button" class="btn btn-primary" style="display: inline-block;">复制链接</button>
+                            <div class="me-auto">
+                            <span class="text-green d-inline-flex align-items-center lh-1"></span>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+<script>
+button.addEventListener('click', function () {
+    var text = 'https://www.4khub.xyz/register?register_code={{ promotion_code }}';
+    if (navigator.clipboard) {
+        // clipboard api 复制
+        navigator.clipboard.writeText(text);
+    } else {
+        var textarea = document.createElement('textarea');
+        document.body.appendChild(textarea);
+        // 隐藏此输入框
+        textarea.style.position = 'fixed';
+        textarea.style.clip = 'rect(0 0 0 0)';
+        textarea.style.top = '10px';
+        // 赋值
+        textarea.value = text;
+        // 选中
+        textarea.select();
+        // 复制
+        document.execCommand('copy', true);
+        // 移除输入框
+        document.body.removeChild(textarea);
+    }
+    alert('已复制到剪切板');
+    //new LightTip().success('复制成功');
+});
+</script>

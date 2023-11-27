@@ -8,11 +8,23 @@ import { CustomElement } from "../../utility/utility.js";
 // : 显示别名 (可选)
 const navbar_list = [
   {
-    name: "我的媒体库",
-    page: "index",
-    icon: html`
-      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><polyline points="5 12 3 12 12 3 21 12 19 12"></polyline><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7"></path><path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6"></path></svg>
-    `,
+    name: "我的影音",
+    list: [
+        {
+          name: "我的媒体库",
+          page: "index",
+          icon: html`
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><polyline points="5 12 3 12 12 3 21 12 19 12"></polyline><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7"></path><path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6"></path></svg>
+          `,
+        },
+        {
+          name: "浏览历史",
+          page: "media_explore_history",
+          icon: html`
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-history" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M12 8l0 4l2 2"></path><path d="M3.05 11a9 9 0 1 1 .5 4m-.5 5v-5h5"></path></svg>
+          `,
+        },
+    ]
   },
   {
     name: "会员中心",
@@ -41,6 +53,19 @@ const navbar_list = [
              <path d="M5 12l0 .01"></path>
              <path d="M5 18l0 .01"></path>
           </svg>
+        `,
+      },
+      {
+        name: "我的推广",
+        page: "my_promotion",
+        icon: html`
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-users" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+           <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+           <path d="M9 7m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"></path>
+           <path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path>
+           <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+           <path d="M21 21v-2a4 4 0 0 0 -3 -3.85"></path>
+        </svg>
         `,
       },
       // {
@@ -913,7 +938,7 @@ export class LayoutNavbar extends CustomElement {
                 
                 <!--                telegram-->
                 <span class="d-flex flex-grow-1 justify-content-center border rounded-3 m-3 p-2 icon-pulse">
-                  <a href='https://t.me/FourKHubxyz' class="text-muted" title='加入官方Telegram频道，和小姐姐随时交流' target="_blank" rel="noreferrer">
+                  <a href='https://t.me/www_4khub_xyz' class="text-muted" title='加入官方Telegram频道，和小姐姐随时交流' target="_blank" rel="noreferrer">
                     <strong>
                       <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-telegram" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                          <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
