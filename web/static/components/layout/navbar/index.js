@@ -938,7 +938,7 @@ export class LayoutNavbar extends CustomElement {
                 
                 <!--                telegram-->
                 <span class="d-flex flex-grow-1 justify-content-center border rounded-3 m-3 p-2 icon-pulse">
-                  <a href='https://t.me/FourKHubxyz' class="text-muted" title='加入官方Telegram频道，和小姐姐随时交流' target="_blank" rel="noreferrer">
+                  <a href='https://t.me/www_4khub_xyz' class="text-muted" title='加入官方Telegram频道，和小姐姐随时交流' target="_blank" rel="noreferrer">
                     <strong>
                       <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-telegram" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                          <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
