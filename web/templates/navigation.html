@@ -983,11 +983,11 @@
 <script type="text/javascript">
 
   //搜索
-  function media_search(tmdbid, title, type, subtype) {
+  function media_search(tmdbid, title, type, subtype, fourkhub_id) {
       if (subtype === '4KHUBVIP'){
           ajax_post("check_is_vip", {}, function (ret) {
               if (ret.is_vip) {
-                const param = {"tmdbid": tmdbid, "search_word": title, "media_type": type,"subtype":subtype};
+                const param = {"tmdbid": tmdbid, "search_word": title, "media_type": type,"subtype":subtype,"fourkhub_id":fourkhub_id};
                 show_refresh_process("正在搜索 " + title + " ...", "search");
                 ajax_post("search", param, function (ret) {
                   hide_refresh_process();
@@ -1002,7 +1002,7 @@
               }
           });
       } else {
-        const param = {"tmdbid": tmdbid, "search_word": title, "media_type": type,"subtype":subtype};
+        const param = {"tmdbid": tmdbid, "search_word": title, "media_type": type,"subtype":subtype,"fourkhub_id":fourkhub_id};
         show_refresh_process("正在搜索 " + title + " ...", "search");
         ajax_post("search", param, function (ret) {
           hide_refresh_process();
@@ -1038,7 +1038,7 @@
         }
 
         $("#system_media_overview2").text(ret.overview2);
-        $("#system_media_overview3").text("点击购买添加管理员Telegram进行购买和咨询，或扫描下方二维码添加");
+        $("#system_media_overview3").text("点击购买加入官方Telegram频道并咨询管理员进行购买，或扫描下方二维码加入频道");
         $("#system_media_overview4").empty();
         $img_telegram = $('<img img-class="w-100 h-100 object-cover" src="../static/img/telegram-channel-ss.png"></img>')
 
@@ -1072,7 +1072,7 @@
 
   function add_telegram(){
       hide_mediainfo_modal();
-      window.open('https://t.me/FourKHubxyz', "_blank"); //_self _blank
+      window.open('https://t.me/www_4khub_xyz', "_blank"); //_self _blank
   }
   //显示媒体详情弹窗
   function show_mediainfo_modal(rtype, name, year, mediaid, page, rssid) {
