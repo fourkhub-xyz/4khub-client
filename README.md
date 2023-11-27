@@ -70,4 +70,4 @@
 欢迎加入官方Twitter
 [![Twitter URL](https://img.shields.io/twitter/url/https/twitter.com/4khubxyz.svg?style=social&label=Follow%20%404khubxyz)](https://twitter.com/4khubxyz)
 
-欢迎加入官方Telegram [@FourKHubxyz](https://t.me/FourKHubxyz)
+欢迎加入官方Telegram [@WWW_4KHUB_XYZ](https://t.me/www_4khub_xyz)
