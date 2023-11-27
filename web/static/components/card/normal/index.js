@@ -152,7 +152,7 @@ export class NormalCard extends observeState(CustomElement) {
             <div class="d-flex justify-content-between">
                 <!--原搜索资源占位符，免费资源-->
               <a class="text-muted" title="搜索资源" @click=${(e) => { e.stopPropagation() }}
-                 href='javascript:media_search("${this.tmdb_id}", "${this.title}", "${this.media_type}", "${this.subtype}")'>
+                 href='javascript:media_search("${this.tmdb_id}", "${this.title}", "${this.media_type}", "${this.subtype}","${this.fourkhub_id}")'>
                 <span class="icon-pulse text-white">
                   <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24"
                       viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
