@@ -133,6 +133,69 @@
                 {% endif %}
               </div>
             </div>
+
+            <div class="mb-3">
+              <div class="btn-list">
+                <label class="form-label">增强模式 <span class="form-help"
+                                                         title="在内建索引器上增加Jackett或Prowlarr扩大资源搜索范围，但会增加搜索时间。须提前在索引器配置好Jackett或Prowlarr"
+                                                         data-bs-toggle="tooltip">?</span></label>
+
+              </div>
+              <div class="row" id="modal-{{ Type }}">
+                  <!-- 开启Jackett -->
+                  <div class="col-lg">
+                    <div class="mb-3">
+                        <label class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="pt.jackett" {% if
+                          Config.pt.jackett %}checked{% endif %}>
+                    <span class="form-check-label">开启Jackett<span class="form-help"
+                                                                            title="开启Jackett索引，请提前在索引器配置好Jackett"
+                                                                            data-bs-toggle="tooltip">?</span></span>
+
+                  </label>
+                    </div>
+                  </div>
+
+                  <!-- 开启Prowlarr -->
+                  <div class="col-lg">
+                    <div class="mb-3">
+                        <label class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="pt.prowlarr" {% if
+                          Config.pt.prowlarr %}checked{% endif %}>
+                    <span class="form-check-label">开启Prowlarr<span class="form-help"
+                                                                            title="开启Prowlarr索引，请提前在索引器配置好Prowlarr"
+                                                                            data-bs-toggle="tooltip">?</span></span>
+
+                  </label>
+                    </div>
+                  </div>
+              </div>
+
+{#              {% for Type, Indexer in IndexerConf.items() %}#}
+{##}
+{#                  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">#}
+{#                    <div class="modal-content">#}
+{##}
+{#                      <div class="modal-body">#}
+{#                      {{ FORM.gen_form_config_elements(Type, Config, Indexer.config) }}#}
+{#                      </div>#}
+{#                      <div class="modal-footer">#}
+{#                        <button onclick="test_indexer_config('{{ Type }}')" id="{{ Type }}_test_btn" class="btn me-auto">#}
+{#                          测试#}
+{#                        </button>#}
+{#                        <button onclick="save_indexer_config('{{ Type }}')" id="{{ Type }}_save_btn" class="btn btn-primary">#}
+{#                          确定#}
+{#                        </button>#}
+{#                      </div>#}
+{#                    </div>#}
+{#                  </div>#}
+{##}
+{#              {% endfor %}#}
+
+
+            </div>
+
+
           </div>
         </div>
       </div>
@@ -162,6 +225,9 @@
     }
     params['test'] = test || false;
     params['pt.search_indexer'] = type;
+    let params2 = input_select_GetVal(`modal-${type}`);
+    params = Object.assign(params2,params)
+
     ajax_post("update_config", params, func);
   }
 
