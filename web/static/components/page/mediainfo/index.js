@@ -176,6 +176,19 @@ export class PageMediainfo extends CustomElement {
                                         </span>
                                     `
                                   }
+                                  ${this.vod == "1"
+                                    ? html`
+                                              <span class="btn btn-pill btn-orange" @click=${this._vodClick}>
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-youtube" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                   <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                   <path d="M2 8a4 4 0 0 1 4 -4h12a4 4 0 0 1 4 4v8a4 4 0 0 1 -4 4h-12a4 4 0 0 1 -4 -4v-8z"></path>
+                                                   <path d="M10 9l5 3l-5 3z"></path>
+                                                </svg>${this.fav == "1" ? html `在线观看`: html `在线试看`}
+                                              </span>
+                                    `
+                                    :html `
+                                          `
+                                    }
                               `
                         : html`
                                   <!-- 免费的展示 不需要改动，去掉搜索-->
@@ -383,6 +396,7 @@ export class PageMediainfo extends CustomElement {
       var fav = this.fav
       var coins = this.coins
       var fourkhub_id = this.fourkhub_id
+      var vod_id = this.vod_id
       Golbal.lit_buy_click(title, year, media_type, tmdbid, fav,
                   () => {
                     fav = "0";
@@ -391,7 +405,7 @@ export class PageMediainfo extends CustomElement {
                   () => {
                     fav = "1";
                     this._update_fav_data();
-                  },pagefrom,fourkhub_id, coins);
+                  },pagefrom,fourkhub_id, coins,vod_id);
   }
   _loveClick(e) {
       var pagefrom = this.subtype

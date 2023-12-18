@@ -118,24 +118,26 @@ export class Golbal {
   }
 
   // 购买按钮被点击时
-  static lit_buy_click(title, year, media_type, tmdb_id, fav, remove_func, add_func,pagefrom,fourkhub_id,coins) {
+  static lit_buy_click(title, year, media_type, tmdb_id, fav, remove_func, add_func,pagefrom,fourkhub_id,coins,vod_id) {
     if (fav == "1"){
       show_ask_modal("是否确定将 " + title + " 从订阅中移除？", function () {
         hide_ask_modal();
         remove_rss_media(title, year, media_type, "", "", tmdb_id, remove_func);
       });
     } else {
-      if (pagefrom == '4KHUBVIP' || pagefrom == "4KHUBSEARCHE"){
+      console.log("pagefrom:"+pagefrom+" vod_id:"+vod_id)
+      //if (pagefrom == '4KHUBVIP' || pagefrom == "4KHUBSEARCHE" || pagefrom == "4KHUBVOD"||pagefrom=='4KHUB_RANK'){
         ajax_post("check_is_vip", {}, function (ret) {
           if (ret.is_vip) {
             show_ask_modal("是否确定用"+coins+"金币购买并订阅： " + title + " ？ 已经成功购买的不会重复扣费", function () {
               hide_ask_modal();
               const mediaid = Golbal.convert_mediaid(tmdb_id);
 
-              ajax_post("buy_4khub_id", {fourkhub_id: fourkhub_id}, function (ret) {
+              ajax_post("buy_4khub_id", {fourkhub_id: fourkhub_id, pagefrom: pagefrom}, function (ret) {
                 if (ret.status === 1) {
+                  console.log("media_type:"+media_type)
                   //购买成功,开始订阅，同普通流程
-                  if (media_type == "MOV" || media_type == "电影") {
+                  if (media_type == "MOV" || media_type == "电影" || media_type == "MOVIE") {
                     add_rss_media(title, year, media_type, mediaid, "", "", add_func,fourkhub_id);
                   } else {
                     ajax_post("get_tvseason_list", {'tmdbid': mediaid, 'title': title,'fourkhub_id':fourkhub_id}, function (ret) {
@@ -161,26 +163,9 @@ export class Golbal {
             show_fail_modal( " VIP会员资源，请至 会员中心-我的会员 购买VIP！");
           }
         });
-      }
-      else {
-        // show_ask_modal("是否确定订阅： " + title + "？", function () {
-        //   hide_ask_modal();
-        //   const mediaid = Golbal.convert_mediaid(tmdb_id);
-        //   if (media_type == "MOV" || media_type == "电影") {
-        //     add_rss_media(title, year, media_type, mediaid, "", "", add_func);
-        //   } else {
-        //     ajax_post("get_tvseason_list", {tmdbid: mediaid, title: title}, function (ret) {
-        //       if (ret.seasons.length === 1) {
-        //         add_rss_media(title, year, "TV", mediaid, "", ret.seasons[0].num, add_func);
-        //       } else if (ret.seasons.length > 1) {
-        //         show_rss_seasons_modal(title, year, "TV", mediaid, ret.seasons, add_func);
-        //       } else {
-        //         show_fail_modal(title + " 添加RSS订阅失败：未查询到季信息！");
-        //       }
-        //     });
-        //   }
-        // });
-      }
+      //}
+      //else {
+      //}
     }
   }
 
