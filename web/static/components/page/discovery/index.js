@@ -96,6 +96,11 @@ export class PageDiscovery extends CustomElement {
           subtype :"伦理/情色",
         },
         {
+          type: "MOV",
+          title:"麻豆傳媒",
+          subtype :"madou_vod",
+        },
+        {
           type: "TV",
           title:"国产剧",
           subtype :"国产剧",
