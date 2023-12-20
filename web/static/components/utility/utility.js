@@ -98,7 +98,7 @@ export class Golbal {
           hide_ask_modal();
           const mediaid = Golbal.convert_mediaid(tmdb_id);
           //console.log("普通订阅 params:" + "{tmdbid:" + mediaid + ", title:" + title + ", media_type:" + media_type + ", year:" + year +"}")
-          if (media_type == "MOV" || media_type == "电影") {
+          if (media_type == "MOV" || media_type == "电影" || "MOVIE" == media_type) {
             add_rss_media(title, year, media_type, mediaid, "", "", add_func,fourkhub_id);
           } else {
             ajax_post("get_tvseason_list", {'tmdbid': mediaid, 'title': title,'fourkhub_id':fourkhub_id}, function (ret) {
