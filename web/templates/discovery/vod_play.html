@@ -181,9 +181,18 @@
 
       var source_map =  JSON.parse(localStorage.getItem("source_map"))
       var new_source_url = ''
+      var vod_id = '{{vod_id}}'
+      var e_url = ''
       for(var i in source_map){
         if(-1 != player{{ dp_id }}.getSourceUrl().search(source_map[i])){
-          delete source_map[i]
+            e_url = source_map[i]
+            setTimeout(()=>{
+                ajax_post("vod_error_update", {
+                      "error_url": e_url,
+                      "vod_id":vod_id
+                    }, function (ret) {})
+            },5000);
+            delete source_map[i]
         } else {
           new_source_url = source_map[i]
         }
@@ -194,7 +203,6 @@
     /* You can register a click event with the custom DOM string to trigger an action, for example, to pop up a dialog box for VIP registration. */
     var vip_limit_btn = document.querySelector('.vip_limit_btn')
     vip_limit_btn.addEventListener('click', function() {
-        console.log("click")
         {% if display_buy_vip %}
             //confirm('确认去开通会员吗?')
             navmenu("/my_member")
@@ -213,8 +221,21 @@
 
 
 </script>
+
 {% else %}
-<link rel="stylesheet" href="/static/css/style/DPlayer.min.css">
+<!--
+{#<link rel="stylesheet" href="/static/css/style/DPlayer.min.css">#}
+{#<script src="/static/js/DPlayer.min.js"></script>#}
+-->
+<!--v1.27.1只有一个js没有css -->
+
+<script src="/static/js/DPlayer.min_v1.27.1.js"></script>
+
+
+<script src="/static/js/hls.min.js"></script>
+{#<script src="/static/js/docute.js"></script>#}
+{#<script src="/static/js/config.js"></script>#}
+{#<script src="/static/js/docsearch.js"></script>#}
 <style>
     .dplayer-logo {
         pointer-events: none;
@@ -245,14 +266,6 @@
         <p><div><span class="badge badge-outline text-blue">如遇卡顿请切换播放源或刷新页面，资源来源于互联网，字幕及广告非本站推送~</span></div></p>
         </div>
 
-
-
-
-<script src="/static/js/hls.min.js"></script>
-<script src="/static/js/DPlayer.min.js"></script>
-<script src="/static/js/docute.js"></script>
-<script src="/static/js/config.js"></script>
-<script src="/static/js/docsearch.js"></script>
 <script>
 
 const dp{{ dp_id }}  = new DPlayer({
@@ -280,5 +293,54 @@ const dp{{ dp_id }}  = new DPlayer({
         defaultQuality: 0
     }
 });
+<!--
+{#var my_quality = [#}
+{#            {% for j in vod_play_list %}#}
+{#                {   name: '{{ j.name }}',#}
+{#                    url: '{{ j.url }}',#}
+{#                    type: 'auto'#}
+{#                },#}
+{#            {% endfor %}#}
+{#            ]#}
+{##}
+{#var count = my_quality.length#}
+{#var index2 = 0#}
+{#var vod_id = '{{vod_id}}'#}
+{#var e_url = ''#}
+{#dp{{ dp_id }}.on('error', function () {#}
+{#    var quality = dp{{ dp_id }}.quality#}
+{#    var index2 = dp{{ dp_id }}.qualityIndex#}
+{#    e_url = quality.url#}
+{#    name = quality.name#}
+{#    console.log('player err:' + e_url + " name:"+ name + " index:"+index2);#}
+{#    index2 = index2 + 1#}
+{#    if (index2 < count){#}
+{#        setTimeout(()=>{#}
+{#            ajax_post("vod_error_update", {#}
+{#                  "error_url": e_url,#}
+{#                  "vod_id":vod_id#}
+{#                }, function (ret) {})#}
+{#        },5000);#}
+{#        console.log("switch index:"+index2)#}
+{#        dp{{ dp_id }}.switchVideo(my_quality[index2])#}
+{#    }#}
+{#});#}
+-->
+dp{{ dp_id }}.on('pause', function () {
+    <!--
+    {#console.log('player:'+ my_quality[index2].name + 'url:' + my_quality[index2].url);#}
+    {#index2 = index2 + 1#}
+    {#if (index2 < count){#}
+    {#    dp{{ dp_id }}.switchVideo(my_quality[index2])#}
+    {#}#}
+
+    {#var q = dp{{ dp_id }}.quality#}
+    {#var j = dp{{ dp_id }}.qualityIndex#}
+    {#e_url2 = q.url#}
+    {#name2 = q.name#}
+    {#console.log('player:' + e_url2 + " name:"+ name2 + " index:"+j);#}
+        -->
+});
+
 </script>
 {% endif %}
