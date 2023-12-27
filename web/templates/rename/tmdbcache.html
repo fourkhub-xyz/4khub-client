@@ -50,6 +50,7 @@
                 <th>标题</th>
                 <th>TMDB</th>
                 <th></th>
+                <th>过期时间</th>
                 <th></th>
               </tr>
               </thead>
@@ -97,6 +98,9 @@
                             onerror="this.src='../static/img/no-image.png'" alt=""
                             style="min-width: 50px"/>
                       {% endif %}
+                    </td>
+                    <td>
+                        {{ TmdbCache[1].expire_time }}
                     </td>
                     <td>
                       <div class="dropdown">
