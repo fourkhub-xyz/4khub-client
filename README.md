@@ -2,6 +2,8 @@
 
 [4khub-client](https://www.4khub.xyz/)是 `www.4khub.xyz`网站客户端，也是个人影视库；所有最新资源，VIP资源都在客户端发布，原网站只做部分资源展示，不再更新资源。客户端更有海量电影电视库提供方便搜索，下载，资源搜刮整理，消息通知，豆瓣订阅等功能。打造专属个人的影视库。
 
+![https://raw.githubusercontent.com/fourkhub-xyz/4khub-client/main/Screenshot%20.png](https://raw.githubusercontent.com/fourkhub-xyz/4khub-client/main/Screenshot%20.png)
+
 ---
 
 ## 如何使用
