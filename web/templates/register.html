@@ -73,15 +73,15 @@
         </div>
         <div class="invalid-feedback mb-3" id="register_promptmsg" style="display:block">{{ prompt_msg }}</div>
 
-        <div id="h-cf" {% if err_msg %} class="form-control is-invalid mb-3" {% else %} class="mb-3"  {% endif %}>
-            <!--<div class="h-captcha" data-sitekey="0450b7b5-2edb-4e1e-8c5b-dc84448a3b0b"></div>
-            <div class="cf-turnstile" data-sitekey="0x4AAAAAAALk4qxTqVMXENm3"></div>-->
-            {% if use_cf %}
-                <div class="cf-turnstile" data-sitekey="0x4AAAAAAALk4qxTqVMXENm3"></div>
-            {% else %}
-                <div class="h-captcha" data-sitekey="0450b7b5-2edb-4e1e-8c5b-dc84448a3b0b"></div>
-            {% endif %}
-        </div>
+{#        <div id="h-cf" {% if err_msg %} class="form-control is-invalid mb-3" {% else %} class="mb-3"  {% endif %}>#}
+{#            <!--<div class="h-captcha" data-sitekey="0450b7b5-2edb-4e1e-8c5b-dc84448a3b0b"></div>#}
+{#            <div class="cf-turnstile" data-sitekey="0x4AAAAAAALk4qxTqVMXENm3"></div>-->#}
+{#            {% if use_cf %}#}
+{#                <div class="cf-turnstile" data-sitekey="0x4AAAAAAALk4qxTqVMXENm3"></div>#}
+{#            {% else %}#}
+{#                <div class="h-captcha" data-sitekey="0450b7b5-2edb-4e1e-8c5b-dc84448a3b0b"></div>#}
+{#            {% endif %}#}
+{#        </div>#}
 
         <label class="form-label">Telegram</label>
         <div class="input-icon mb-3">
