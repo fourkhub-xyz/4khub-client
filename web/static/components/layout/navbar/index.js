@@ -68,18 +68,18 @@ const navbar_list = [
         </svg>
         `,
       },
-      // {
-      //   name: "更新信息",
-      //   page: "update_my_info?method=1",
-      //   icon: html`
-      //     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-edit" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-      //        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-      //        <path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1"></path>
-      //        <path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z"></path>
-      //        <path d="M16 5l3 3"></path>
-      //     </svg>
-      //   `,
-      // }
+       {
+         name: "更新信息",
+         page: "update_my_info?method=1",
+         icon: html`
+           <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-edit" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+              <path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1"></path>
+              <path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z"></path>
+              <path d="M16 5l3 3"></path>
+           </svg>
+         `,
+       }
     ]
   },
   {
@@ -695,7 +695,9 @@ export class LayoutNavbar extends CustomElement {
       // 打开第一个页面
       for (const item of navbar_list) {
         if (item.name === this.layout_userpris[0]) {
-          navmenu(item.page ?? item.list[0].page);
+          var url = item.page ?? item.list[0].page
+          url = 'gongao' //打开公告页面
+          navmenu(url);
           break;
         }
       }
@@ -890,7 +892,7 @@ export class LayoutNavbar extends CustomElement {
                   : nothing }
                 `))}
               </div>
-              ${console.log("_is_update:"+this._is_update +" layout_appversion:"+this.layout_appversion +" _update_appversion:"+this._update_appversion)}
+              
               <div class="d-flex align-items-end">
                 <span class="d-flex flex-grow-1 justify-content-center border rounded-3 m-3 p-2 ${this._is_update ? "bg-yellow" : ""}">
                   <a href=${this._update_url} class="${this._is_update ? "text-yellow-fg" : "text-muted"}" title='获取最新版本'  target="_blank" rel="noreferrer">
