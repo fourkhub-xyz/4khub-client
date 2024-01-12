@@ -1,0 +1,163 @@
+{% import 'macro/svg.html' as SVG %}
+{% import 'macro/oops.html' as OOPS %}
+<script type="text/javascript">
+    //显示详情弹窗
+  function show_modal(id,type) {
+      console.log(type)
+    ajax_post("notice_info", {
+      "id": id,"type":type
+    }, function (ret) {
+      if (ret.code === 1) {
+        //显示信息
+        $("#system_media_name").text(ret.title);
+        $("#system_release_date").text(ret.time)
+
+        if (ret.type === '0') {
+          $("#system_media_poster").attr({"img-src":"../static/img/laba.png","class":""});
+          //$("#system_media_poster").attr("class", "0");
+        } else {
+          $("#system_media_poster").attr("img-src", "../static/img/pushdeer.png");
+        }
+       // if (ret.content && ret.content.length > 200) {
+       //   $("#system_media_overview").text(ret.content.substr(0, 200) + " ...");
+       // } else {
+       //   $("#system_media_overview").text(ret.content);
+       // }
+
+        $("#system_media_overview").text(ret.content);
+        $("#system_media_overview3").text("加入官方Telegram频道随时获取最新资讯，或扫描下方二维码加入频道");
+        $("#system_media_overview4").empty();
+        $img_telegram = $('<img img-class="w-100 h-100 object-cover" src="../static/img/telegram-channel-ss.png"></img>')
+
+        $("#system_media_overview4").append($img_telegram);
+
+        //先隐藏所有按钮，有需要再显示
+        $("#system_media_rss_btn").hide();
+        $("#system_media_search_btn").hide();
+        $("#system_media_refresh_btn").hide();
+        $("#system_media_url_btn").hide();
+        $("#system_media_search_btn").text("点击加入官方Telegram频道")
+              .attr("href", 'javascript:add_telegram()')
+              .show();
+        //弹窗
+        $("#system-media-modal").modal("show");
+      }
+    });
+  }
+</script>
+<div class="container-xl">
+    <div class="page-header d-print-none">
+        <div class="row align-items-center">
+            <div class="col">
+                <h2 class="page-title">
+                    公告
+                </h2>
+            </div>
+            <div class="col-auto ms-auto d-print-none">
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="page-body">
+    <div class="container-xl">
+
+        <div class="row row-deck row-cards">
+            <div class="col-12 col-md-12 col-lg-0">
+                    <div class="card">
+                        <div class="card-stamp">
+                            <div class="card-stamp-icon" style="background-color: transparent">
+                                <img src="../static/img/laba.png">
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div class="subheader">公告/通知</div>
+                            </div>
+                            <div class="d-flex align-items-baseline">
+{#                                <ul>#}
+{#                                    {% for i in notice %}#}
+{#                                        <li>{{ i.title }}  | {{ i.time }}</li>#}
+{#                                    {% endfor %}#}
+{#                                </ul>#}
+
+                                <div class="table-responsive" style="min-height: 50%; ">
+                                    <table class="table table-vcenter card-table table-hover table-striped">
+                                      <tbody>
+                                      {% if NoticeCount > 0 %}
+                                        {% for TmdbCache in notice %}
+                                          <tr>
+                                            <td>
+                                                {{ TmdbCache.time }}
+                                            </td>
+                                            <td>
+                                                <a class="card card-link-pop rounded-3 p-0"
+                                                   href='javascript:show_modal("{{ TmdbCache.id }}","{{ TmdbCache.type }}")'>
+                                                    {{ TmdbCache.title }}</a>
+                                            </td>
+                                          </tr>
+                                        {% endfor %}
+                                      {% else %}
+                                        <tr>
+                                          <td colspan="5" align="center">没有数据</td>
+                                        </tr>
+                                      {% endif %}
+                                      </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% if release_note %}
+            <div class="col-12 col-md-12 col-lg-0">
+                    <div class="card">
+                        <div class="card-stamp">
+                            <div class="card-stamp-icon" style="background-color: transparent">
+                                <img src="../static/img/pushdeer.png">
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div class="subheader">更新日志</div>
+                            </div>
+                            <div class="d-flex align-items-baseline">
+                                <div class="table-responsive" style="min-height: 50%; ">
+                                    <table class="table table-vcenter card-table table-hover table-striped">
+                                      <tbody>
+                                      {% if note_count > 0 %}
+                                        {% for TmdbCache in release_note %}
+                                          <tr>
+                                            <td>
+                                                {{ TmdbCache.time }}
+                                            </td>
+                                            <td>
+                                                <a class="card card-link-pop rounded-3 p-0"
+                                                   href='javascript:show_modal("{{ TmdbCache.id }}","{{ TmdbCache.type }}")'>
+                                                    {{ TmdbCache.title }}</a>
+
+                                            </td>
+                                          </tr>
+                                        {% endfor %}
+                                      {% else %}
+                                        <tr>
+                                          <td colspan="5" align="center">没有数据</td>
+                                        </tr>
+                                      {% endif %}
+                                      </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+
+    </div>
+</div>
+
+<script type="text/html" id="no_gongao_html">
+{{ OOPS.empty('没有数据。') }}
+</script>
