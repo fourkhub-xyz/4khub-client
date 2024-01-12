@@ -5,8 +5,9 @@
         <div class="row align-items-center">
             <div class="col">
                 <h2 class="page-title">
-                    更新信息 - 用户名：{{ username }}
+                    更新信息
                 </h2>
+                <div class="text-muted mt-1" id="recommend_subtitle"></div>
             </div>
             <div class="col-auto ms-auto d-print-none">
 
@@ -301,6 +302,12 @@
 
 
 <script>
+    SubTitle = '{{ SubTitle or "" }}';
+  if (SubTitle) {
+    $("#recommend_subtitle").text('当前用户：'+SubTitle).show();
+  } else {
+    $("#recommend_subtitle").hide();
+  }
     function heredoc(fn) {
         return fn.toString().split('\n').slice(1,-1).join('\n') + '\n'
     }
