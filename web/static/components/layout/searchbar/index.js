@@ -166,18 +166,52 @@ export class LayoutSearchbar extends CustomElement {
               </a>
             </span>
           </div>
-            <div class="nav-item dropdown me-2">
-                <a href="javascript:navmenu('help')" title="帮助文档" class="nav-link d-flex lh-1 text-reset ms-1 p-0">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-book" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                       <path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"></path>
-                       <path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"></path>
-                       <path d="M3 6l0 13"></path>
-                       <path d="M12 6l0 13"></path>
-                       <path d="M21 6l0 13"></path>
+            
+            <div class="nav-item dropdown me-2 icon-pulse">
+                <a href='https://t.me/www_4khub_xyz' title="加入官方Telegram频道，和小姐姐随时交流" target="_blank" rel="noreferrer" class="nav-link d-flex lh-1 text-reset ms-1 p-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-telegram" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                         <path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4"></path>
                     </svg>
                 </a>
             </div>
+            
+            <div class="nav-item dropdown me-2 icon-pulse">
+                <a href='https://twitter.com/4khubxyz?t=w7DjRb66j1WGxGKaUkIaLQ&s=09' title="加入官方Twitter，及时获取最新消息" target="_blank" rel="noreferrer" class="nav-link d-flex lh-1 text-reset ms-1 p-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                         <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c0 -.249 1.51 -2.772 1.818 -4.013z"></path>
+                    </svg>
+                </a>
+            </div>
+            
+            <div class="icon-demo-icon">
+                <div class="icon-item-new"></div>
+                <div class="nav-item dropdown me-2 icon-pulse">
+                    <a href="javascript:navmenu('gongao')" title="公告" class="nav-link d-flex lh-1 text-reset ms-1 p-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-message {{ class }}" width="24" height="24"
+                           viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                           stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <path d="M4 21v-13a3 3 0 0 1 3 -3h10a3 3 0 0 1 3 3v6a3 3 0 0 1 -3 3h-9l-4 4"></path>
+                            <line x1="8" y1="9" x2="16" y2="9"></line>
+                            <line x1="8" y1="13" x2="14" y2="13"></line>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+<!--            <div class="nav-item dropdown me-2">-->
+<!--                <a href="javascript:navmenu('help')" title="帮助文档" class="nav-link d-flex lh-1 text-reset ms-1 p-0">-->
+<!--                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-book" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">-->
+<!--                       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>-->
+<!--                       <path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"></path>-->
+<!--                       <path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"></path>-->
+<!--                       <path d="M3 6l0 13"></path>-->
+<!--                       <path d="M12 6l0 13"></path>-->
+<!--                       <path d="M21 6l0 13"></path>-->
+<!--                    </svg>-->
+<!--                </a>-->
+<!--            </div>-->
             
           <!-- 头像 -->
           <div class="nav-item dropdown me-2">
@@ -208,6 +242,7 @@ export class LayoutSearchbar extends CustomElement {
                     : nothing }
                   `
                 : nothing }
+                  <a href="javascript:navmenu('help')" class="dropdown-item">帮助文档</a>
                 <a href="javascript:logout()" class="dropdown-item">
                   注销 <span class="text-muted mx-3">${this.layout_username}</span>
                 </a>

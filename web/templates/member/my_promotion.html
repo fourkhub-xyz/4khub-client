@@ -1,3 +1,5 @@
+{% import 'macro/svg.html' as SVG %}
+{% import 'macro/oops.html' as OOPS %}
 <div class="container-xl">
     <div class="page-header d-print-none">
         <div class="row align-items-center">
@@ -5,6 +7,7 @@
                 <h2 class="page-title">
                     我的推广
                 </h2>
+                <div class="text-muted mt-1" id="recommend_subtitle"></div>
             </div>
             <div class="col-auto ms-auto d-print-none">
 
@@ -12,12 +15,34 @@
         </div>
     </div>
 </div>
-
+{% if promotion_code %}
 <div class="page-body">
-
     <div class="container-xl">
 
         <div class="row row-deck row-cards">
+            <div class="col-12 col-md-12 col-lg-0">
+                <div class="card">
+                    <div class="card-stamp">
+                        <div class="card-stamp-icon" style="background-color: transparent">
+                            <img src="../static/img/vip-last.png">
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <div class="subheader">推广规则</div>
+                        </div>
+                        <div class="d-flex align-items-baseline">
+                            <ul>
+                                <li>复制推广链接邀请用户注册，或注册时填写邀请注册码<strong>{{ promotion_code }}</strong>，注册成功即算作推广的用户。（重复注册等作弊行为将被取消奖励）</li>
+                                {% for i in promotion_rules %}
+                                    <li>{{ i }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="col-12 col-md-12 col-lg-0">
                 <div class="card">
                     <div class="card-stamp">
@@ -42,11 +67,106 @@
 
                 </div>
             </div>
+
+            <div class="col-12 col-md-12 col-lg-0">
+                <div class="card">
+                    <div class="card-stamp">
+                        <div class="card-stamp-icon" style="background-color: transparent">
+                            <img src="../static/img/coin.png">
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <div class="subheader">推广列表</div>
+                        </div>
+                        <div class="d-flex align-items-baseline">
+                            <div class="card">
+                              <div class="card-body border-bottom py-3">
+                                <div class="d-flex">
+                                  <div class="text-muted">
+                                    共 {{ TotalCount }} 条记录
+                                  </div>
+                                  <div class="ms-auto text-muted">
+                                    搜索:
+                                    <div class="ms-2 d-inline-block">
+                                      <input id="search_word" value="{{ Search }}" type="text" placeholder="注册用户名或注册时间"
+                                             class="form-control form-control-sm" aria-label="搜索">
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="table-responsive" style="min-height: 300px; overflow-x: scroll"> <!--overflow: hidden-->
+                                <table class="table table-vcenter card-table table-hover table-striped">
+                                  <thead>
+                                  <tr>
+                                    <th>注册用户名</th>
+                                    <th>注册时间</th>
+                                  </tr>
+                                  </thead>
+                                  <tbody>
+                                  {% if TotalCount > 0 %}
+                                    {% for TmdbCache in promotion_list %}
+                                      <tr>
+
+                                        <td>
+                                            {{ TmdbCache.username }}
+                                        </td>
+
+                                        <td>
+                                            {{ TmdbCache.create_time }}
+
+                                        </td>
+
+                                      </tr>
+                                    {% endfor %}
+                                  {% else %}
+                                    <tr>
+                                      <td colspan="5" align="center">没有数据</td>
+                                    </tr>
+                                  {% endif %}
+                                  </tbody>
+                                </table>
+                              </div>
+                              {% if TotalCount > 0 %}
+                                <div class="card-footer d-flex align-items-center">
+                                  <p class="m-0 text-muted">当前页 <span>{{ Count }}</span> 条</p>
+                                  <ul class="pagination m-0 ms-auto">
+                                    <li class="page-item {% if CurrentPage==1 %} disabled {% endif %}">
+                                      <a class="page-link" href="javascript:go_pre_page('{{ Search }}', {{ CurrentPage }})"
+                                         tabindex="-1" aria-disabled="true">
+                                        {{ SVG.chevron_left() }}
+                                      </a>
+                                    </li>
+                                    {% for page in PageRange %}
+                                      <li class="page-item {% if page==CurrentPage %} active {% endif %}">
+                                        <a class="page-link"
+                                           href="javascript:navmenu('my_promotion?s={{ Search }}&page={{ page }}')">{{ page }}</a>
+                                      </li>
+                                    {% endfor %}
+                                    <li class="page-item {% if CurrentPage >= TotalPage %} disabled {% endif %}">
+                                      <a class="page-link"
+                                         href="{% if CurrentPage < TotalPage %}javascript:go_next_page('{{ Search }}', {{ CurrentPage }}){% else %}javascript:void(0){% endif %}">
+                                        {{ SVG.chevron_right() }}
+                                      </a>
+                                    </li>
+                                  </ul>
+                                </div>
+                              {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
         </div>
 
 
     </div>
 </div>
+{% else %}
+    {{ OOPS.empty('没有数据。', '请注册/登录4KHub影视天堂账号，或稍候刷新页面') }}
+{% endif %}
 <script>
 button.addEventListener('click', function () {
     var text = 'https://www.4khub.xyz/register?register_code={{ promotion_code }}';
@@ -72,4 +192,30 @@ button.addEventListener('click', function () {
     alert('已复制到剪切板');
     //new LightTip().success('复制成功');
 });
+</script>
+<script type="text/javascript">
+    SubTitle = '{{ SubTitle or "" }}';
+      if (SubTitle) {
+        $("#recommend_subtitle").text('当前用户：'+SubTitle).show();
+      } else {
+        $("#recommend_subtitle").hide();
+      }
+  // 上一页
+  function go_pre_page(search, page) {
+    navmenu("my_promotion?s=" + search + "&page=" + (page - 1))
+  }
+
+  // 下一页
+  function go_next_page(search, page) {
+    navmenu("my_promotion?s=" + search + "&page=" + (page + 1))
+  }
+
+  // 搜索按钮
+  $('#search_word').bind('keypress', function (event) {
+    if (event.keyCode == "13") {
+      let keyword = $("#search_word").val();
+      navmenu("my_promotion?s=" + keyword);
+    }
+  });
+
 </script>
