@@ -290,6 +290,7 @@
     $(this).text("备份中...").attr("disabled", true);
     ajax_backup(function () {
       $(this).attr("disabled", false).text("备份当前配置");
+      $("#backup_btn").attr("disabled", false).text("备份当前配置");
     });
   });
 
@@ -303,7 +304,7 @@
       $(this).attr("disabled", false).text("恢复配置");
       $("#modal-backup").modal('hide');
       if (ret.code === 0) {
-        show_success_modal("备份恢复成功，请重启系统生效！");
+        show_success_modal("备份恢复成功！请重新登录。");
       } else {
         show_fail_modal(`备份恢复失败：${ret.msg}`, function() {
           $("#modal-backup").modal('show');
