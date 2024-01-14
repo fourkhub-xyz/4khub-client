@@ -1,4 +1,15 @@
 {% import 'macro/svg.html' as SVG %}
+<script type="text/javascript">
+    $(document).ready(function(){
+        var links = document.getElementsByName("tmdb_id")
+        for (var i of links){
+            var text = i.text
+            if (text.length > 20){
+                i.text = text.substring(0,20) + "..."
+            }
+        }
+    });
+</script>
 <div class="container-xl">
   <!-- Page title -->
   <div class="page-header d-print-none">
@@ -59,7 +70,7 @@
                     </td>
                     <td>
                       <div>{{ Item.NAME }} ({{ Item.YEAR }}) {{ Item.SEASON or '' }}</div>
-                      <span title="TMDB ID"><a class="badge badge-outline text-green me-1 mb-1"
+                      <link title="TMDB ID"><a name="tmdb_id" class="badge badge-outline text-green me-1 mb-1"
                                                href="https://www.themoviedb.org/{% if Item.TYPE == 'MOV' %}movie{% else %}tv{% endif %}/{{ Item.TMDBID }}"
                                                target="_blank">{{ Item.TMDBID }}</a></span>
                       {% if Item.TOTAL %}
