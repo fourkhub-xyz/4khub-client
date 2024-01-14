@@ -3,7 +3,6 @@
 <script type="text/javascript">
     //显示详情弹窗
   function show_modal(id,type) {
-      console.log(type)
     ajax_post("notice_info", {
       "id": id,"type":type
     }, function (ret) {
@@ -18,13 +17,9 @@
         } else {
           $("#system_media_poster").attr("img-src", "../static/img/pushdeer.png");
         }
-       // if (ret.content && ret.content.length > 200) {
-       //   $("#system_media_overview").text(ret.content.substr(0, 200) + " ...");
-       // } else {
-       //   $("#system_media_overview").text(ret.content);
-       // }
-
-        $("#system_media_overview").text(ret.content);
+        $("#system_media_overview").empty();
+        var $newElement=$(ret.content);
+        $("#system_media_overview").append($newElement); //添加html 子元素
         $("#system_media_overview3").text("加入官方Telegram频道随时获取最新资讯，或扫描下方二维码加入频道");
         $("#system_media_overview4").empty();
         $img_telegram = $('<img img-class="w-100 h-100 object-cover" src="../static/img/telegram-channel-ss.png"></img>')
@@ -75,11 +70,6 @@
                                 <div class="subheader">公告/通知</div>
                             </div>
                             <div class="d-flex align-items-baseline">
-{#                                <ul>#}
-{#                                    {% for i in notice %}#}
-{#                                        <li>{{ i.title }}  | {{ i.time }}</li>#}
-{#                                    {% endfor %}#}
-{#                                </ul>#}
 
                                 <div class="table-responsive" style="min-height: 50%; ">
                                     <table class="table table-vcenter card-table table-hover table-striped">
