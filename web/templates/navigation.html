@@ -984,9 +984,28 @@
 
   //搜索
   function media_search(tmdbid, title, type, subtype, fourkhub_id) {
-      if (subtype === '4KHUBVIP'){
-          ajax_post("check_is_vip", {}, function (ret) {
-              if (ret.is_vip) {
+    ajax_post("check_is_guest", {}, function (ret) {
+        if (ret.is_guest) {
+            show_fail_modal( "4KHub注册会员资源，请至[会员中心]-[我的会员]去注册4KHub影视天堂会员~");
+        } else {
+            if (subtype === '4KHUBVIP'){
+                  ajax_post("check_is_vip", {}, function (ret) {
+                      if (ret.is_vip) {
+                        const param = {"tmdbid": tmdbid, "search_word": title, "media_type": type,"subtype":subtype,"fourkhub_id":fourkhub_id};
+                        show_refresh_process("正在搜索 " + title + " ...", "search");
+                        ajax_post("search", param, function (ret) {
+                          hide_refresh_process();
+                          if (ret.code === 0) {
+                            navmenu('search?s=' + title)
+                          } else {
+                            show_fail_modal(ret.msg);
+                          }
+                        }, true, false);
+                      } else {
+                        show_fail_modal( " VIP会员资源，请至 会员中心-我的会员 购买VIP！");
+                      }
+                  });
+              } else {
                 const param = {"tmdbid": tmdbid, "search_word": title, "media_type": type,"subtype":subtype,"fourkhub_id":fourkhub_id};
                 show_refresh_process("正在搜索 " + title + " ...", "search");
                 ajax_post("search", param, function (ret) {
@@ -997,22 +1016,10 @@
                     show_fail_modal(ret.msg);
                   }
                 }, true, false);
-              } else {
-                show_fail_modal( " VIP会员资源，请至 会员中心-我的会员 购买VIP！");
               }
-          });
-      } else {
-        const param = {"tmdbid": tmdbid, "search_word": title, "media_type": type,"subtype":subtype,"fourkhub_id":fourkhub_id};
-        show_refresh_process("正在搜索 " + title + " ...", "search");
-        ajax_post("search", param, function (ret) {
-          hide_refresh_process();
-          if (ret.code === 0) {
-            navmenu('search?s=' + title)
-          } else {
-            show_fail_modal(ret.msg);
-          }
-        }, true, false);
-      }
+        }
+    });
+
   }
 
   //显示产品详情弹窗

@@ -26,7 +26,7 @@ app:
   # 【WEB管理页面登录用户】，默认guest
   login_user: guest
   # 【WEB管理页面登录密码】：默认password，如果是全数字密码，要用''括起来
-  login_password: '[hash]$P$HU6uuWGE4leWNU0E/2.jU93f9r1uP.0'
+  login_password: '[hash]$P$Hu7Dr/93dSpMKGeOanExvmE9b15g6T/'
   # 【WEB管理界面使用的HTTPS的证书和KEY的路径】，留空则不启用HTTPS
   ssl_cert: ''
   ssl_key: ''
@@ -41,10 +41,8 @@ app:
   # 【设置代理】，themoviedb、fanart、telegram等将使用代理访问，http和https均需配置，可以是http也可以是socks5、socks5h(remote DNS) ，但需要带http或socks5前缀，两项可以配置为一样，留空则不启用
   # 示例：'http://127.0.0.1:7890' 'socks5://127.0.0.1:8018' 'socks5h://127.0.0.1:8018'
   proxies:
-    https:
-    http:
-  # 【本系统的WEB的外网地址】：需要是外网IP或者域名，需要包含端口，用于微信/Telegram信息点击跳转，如不需要可配空
-  # 示例：http://IP:3333
+    https: http://localhost:7890
+    http: http://localhost:7890
   domain: ''
   # 【UserAgent】：可适当修改，用于站点签到、豆瓣数据抓取等
   user_agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
@@ -52,7 +50,7 @@ app:
   # 【登录界面壁纸】：themoviedb、bing，设置为themoviedb时需要配置TMDB API Key时才生效
   wallpaper: themoviedb
   # Debug mode
-  debug: false
+  debug: true
 
 # 【配置媒体库信息】
   init_files:
@@ -201,33 +199,16 @@ pt:
   # 1、通过微信发送关键字，实时检索下载，发送格式示例：电视剧 西部世界、西部世界第1季、西部世界第1季第2集、西部世界 2022，只会匹配真实名称，命中后会自动下载，使用说明参考：https://github.com/fourkhub-xyz/4khub-client/wiki/
   # 2、使用WEB UI中的搜索界面搜索资源，会识别显示真实名称，并显示媒体图片和评分等信息，会同时匹配种子名称跟真实名称
   search_indexer: builtin
+
   # 【内置索引器 - 索引增强】
   # 内置索引增加jackett索引
   jackett: true
   # 内置索引增加prowlarr索引
-  prowlarr: true
+  prowlarr: false
+
   # 【内建索引器使用的站点】：只有在该站点列表中内建索引器搜索时才会使用
   indexer_sites:
   - 4KHUB
-  - rarbg
-  - dmhy
-  - eztv
-  - acg.rip
-  - thepiratebay
-  - nyaa
-  - 1337x
-  - ext
-  - torrentgalaxy
-  - mikanani
-  - gaoqing
-  - mp4ba
-  - miobt
-  - katcr
-  - btsow
-  - hdpianyuan
-  - comicat
-  # 【远程搜索自动择优下载开关】：如开启则微信等渠道搜索后会自动择优选择一项下载，如不开启则需要手工点击进入WEB页面选择下载
-  # 如没有配置app.domain或无公网环境建议开启，否则无法跳转WEB页面手工选择
   search_auto: true
   # 【远程下载不完整自动订阅】：如开启，远程搜索下载不完整时，会自动添加RSS订阅
   search_no_result_rss: false
@@ -247,11 +228,11 @@ pt:
 # 【配置Jackett检索器】
 jackett:
   # 【Jackett地址】：Jackett地址和端口，格式：http(s)://IP:PORT
-  host:
+  host: http://192.168.2.7:9117
   # 【Jackett ApiKey】：Jackett配置页面右上角复制API Key
-  api_key:
+  api_key: 7zl5n2zme22dowa5fpypnnh1pc6osrml
   # 【Jackett管理密码】：如未设置可为空
-  password:
+  password: ''
 
 # 【配置prowlarr检索器】
 prowlarr:
@@ -290,7 +271,7 @@ client115:
 # 配置Aria2下载器
 aria2:
   # Aria2地址
-  host: 192.168.2.6
+  host: 192.168.2.7
   # Aria2 RPC端口
   port: '6800'
   # 密码令牌

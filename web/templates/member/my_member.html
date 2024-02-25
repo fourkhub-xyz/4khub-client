@@ -7,6 +7,7 @@
         <h2 class="page-title">
           我的会员
         </h2>
+          <div class="text-muted mt-1" id="recommend_subtitle">{{ SubTitle }} | <a href="#" onclick="register()">注册4KHub影视天堂会员</a><div>
       </div>
       <div class="col-auto ms-auto d-print-none">
 
@@ -110,4 +111,12 @@
 
     </div>
   </div>
-
+<script type="text/javascript">
+    function register(){
+        ajax_post("logout", {}, function (ret) {
+            if(ret.code === 0){
+                window.location.href='/register'
+            }
+        });
+    }
+</script>

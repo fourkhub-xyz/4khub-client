@@ -10,6 +10,7 @@
         //显示信息
         $("#system_media_name").text(ret.title);
         $("#system_release_date").text(ret.time)
+          $("#system_release_date2").empty();
 
         if (ret.type === '0') {
           $("#system_media_poster").attr({"img-src":"../static/img/laba.png","class":""});
@@ -22,6 +23,7 @@
         $("#system_media_overview").append($newElement); //添加html 子元素
         $("#system_media_overview3").text("加入官方Telegram频道随时获取最新资讯，或扫描下方二维码加入频道");
         $("#system_media_overview4").empty();
+        $("#system_media_overview2").empty();
         $img_telegram = $('<img img-class="w-100 h-100 object-cover" src="../static/img/telegram-channel-ss.png"></img>')
 
         $("#system_media_overview4").append($img_telegram);
