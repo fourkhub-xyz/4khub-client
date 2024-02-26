@@ -31,7 +31,7 @@
             <span class="input-icon-addon">
               {{ SVG.user() }}
             </span>
-          <input type="text" name="username" class="form-control {% if err_msg %}is-invalid{% endif %}"
+          <input type="text" name="username" id="username" class="form-control {% if err_msg %}is-invalid{% endif %}"
                  placeholder="用户名" value="" autocomplete="off">
         </div>
         <label class="form-label">密码</label>
@@ -39,7 +39,7 @@
             <span class="input-icon-addon">
               {{ SVG.keyboard() }}
             </span>
-          <input type="password" class="form-control {% if err_msg %}is-invalid{% endif %}" name="password"
+          <input type="password" class="form-control {% if err_msg %}is-invalid{% endif %}" id="password" name="password"
                  placeholder="密码" autocomplete="off">
         </div>
 
@@ -50,8 +50,19 @@
         <div class="invalid-feedback mb-3" id="login_retmsg" style="display:block">{{ err_msg }}</div>
         <div class="mb-3">
           <label class="form-check">
-            <input type="checkbox" name="remember" class="form-check-input" checked/>
-            <span class="form-check-label">保持登录</span>
+              <div class="mb-0">
+                  <div class="div-a">
+                      <input type="checkbox" name="remember" class="form-check-input" checked/>
+                      <span class="form-check-label">保持登录</span>
+                  </div>
+                  <div class="div-b">
+                      <input type="checkbox" id="probation" name="probation" class="form-check-input" onclick="calc();"/>
+                      <span class="form-check-label">免注册试用<span class="form-help"
+                                                               title="勾选免注册试用，将使用guest账号登录试用，但guest账号功能受限，不能获取4KHub影视天堂精品资源等，体验完整服务请注册4KHub影视天堂~"
+                                                               data-bs-toggle="tooltip">?</span>
+                      </span>
+                  </div>
+              </div>
           </label>
         </div>
         <div class="form-footer">
@@ -69,6 +80,18 @@
 </div>
 <script src="../static/js/tabler.min.js"></script>
 <script src="../static/js/demo.min.js"></script>
+<script>
+    function calc(){
+        if (document.getElementById('probation').checked)
+          {
+              document.getElementById('password').value = 'password'
+              document.getElementById('username').value = 'guest'
+          } else {
+              document.getElementById('password').value = ''
+              document.getElementById('username').value = ''
+          }
+    }
+</script>
 </body>
 
 </html>
