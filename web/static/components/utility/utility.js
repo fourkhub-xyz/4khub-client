@@ -55,65 +55,71 @@ export class Golbal {
         remove_rss_media(title, year, media_type, "", "", tmdb_id, remove_func);
       });
     } else {
-      if (pagefrom == '4KHUBVIP'){
-        console.log("vip订阅 params:" + " pagefrom:" + pagefrom + " fourkhub_id:"+fourkhub_id + " tmdb_id:" + tmdb_id)
-        ajax_post("check_is_vip", {}, function (ret) {
-          if (ret.is_vip) {
-            show_ask_modal("是否确定用5金币购买并订阅： " + title + " ？ 已经成功购买的不会重复扣费", function () {
-              hide_ask_modal();
-              const mediaid = Golbal.convert_mediaid(tmdb_id);
+      ajax_post("check_is_guest",{},function (ret){
+        if(ret.is_guest){
+          show_fail_modal( "4KHub注册会员资源，请至[会员中心]-[我的会员]去注册4KHub影视天堂会员~");
+        }else {
+                if (pagefrom == '4KHUBVIP'){
+                  console.log("vip订阅 params:" + " pagefrom:" + pagefrom + " fourkhub_id:"+fourkhub_id + " tmdb_id:" + tmdb_id)
+                  ajax_post("check_is_vip", {}, function (ret) {
+                    if (ret.is_vip) {
+                      show_ask_modal("是否确定用5金币购买并订阅： " + title + " ？ 已经成功购买的不会重复扣费", function () {
+                        hide_ask_modal();
+                        const mediaid = Golbal.convert_mediaid(tmdb_id);
 
-              ajax_post("buy_4khub_id", {fourkhub_id: fourkhub_id,tmdb_id: tmdb_id}, function (ret) {
-                if (ret.status === 1) {
-                  //购买成功,开始订阅，同普通流程
-                  if (media_type == "MOV" || media_type == "电影") {
-                    add_rss_media(title, year, media_type, mediaid, "", "", add_func,fourkhub_id);
-                  } else {
-                    ajax_post("get_tvseason_list", {'tmdbid': mediaid, 'title': title,'fourkhub_id':fourkhub_id}, function (ret) {
-                      if (ret.seasons.length === 1) {
-                        add_rss_media(title, year, "TV", mediaid, "", ret.seasons[0].num, add_func,fourkhub_id);
-                      } else if (ret.seasons.length > 1) {
-                        show_rss_seasons_modal(title, year, "TV", mediaid, ret.seasons, add_func);
-                      } else {
-                        show_fail_modal(title + " 添加RSS订阅失败：未查询到季信息！");
-                      }
-                    });
-                  }
+                        ajax_post("buy_4khub_id", {fourkhub_id: fourkhub_id,tmdb_id: tmdb_id}, function (ret) {
+                          if (ret.status === 1) {
+                            //购买成功,开始订阅，同普通流程
+                            if (media_type == "MOV" || media_type == "电影") {
+                              add_rss_media(title, year, media_type, mediaid, "", "", add_func,fourkhub_id);
+                            } else {
+                              ajax_post("get_tvseason_list", {'tmdbid': mediaid, 'title': title,'fourkhub_id':fourkhub_id}, function (ret) {
+                                if (ret.seasons.length === 1) {
+                                  add_rss_media(title, year, "TV", mediaid, "", ret.seasons[0].num, add_func,fourkhub_id);
+                                } else if (ret.seasons.length > 1) {
+                                  show_rss_seasons_modal(title, year, "TV", mediaid, ret.seasons, add_func);
+                                } else {
+                                  show_fail_modal(title + " 添加RSS订阅失败：未查询到季信息！");
+                                }
+                              });
+                            }
 
-                } else if(ret.status === 2) {
-                  show_fail_modal("支付失败！请到 会员中心-订单中心 里继续进行支付");
-                } else {
-                  show_fail_modal(title + " 购买失败！");
+                          } else if(ret.status === 2) {
+                            show_fail_modal("支付失败！请到 会员中心-订单中心 里继续进行支付");
+                          } else {
+                            show_fail_modal(title + " 购买失败！");
+                          }
+                        });
+
+                      });
+                    } else {
+                      show_fail_modal( " VIP会员资源，请至 会员中心-我的会员 购买VIP！");
+                    }
+                  });
                 }
-              });
-
-            });
-          } else {
-            show_fail_modal( " VIP会员资源，请至 会员中心-我的会员 购买VIP！");
-          }
-        });
-      }
-      else {
-        show_ask_modal("是否确定订阅： " + title + "？", function () {
-          hide_ask_modal();
-          const mediaid = Golbal.convert_mediaid(tmdb_id);
-          //console.log("普通订阅 params:" + "{tmdbid:" + mediaid + ", title:" + title + ", media_type:" + media_type + ", year:" + year +"}")
-          if (media_type == "MOV" || media_type == "电影" || "MOVIE" == media_type) {
-            add_rss_media(title, year, media_type, mediaid, "", "", add_func,fourkhub_id);
-          } else {
-            ajax_post("get_tvseason_list", {'tmdbid': mediaid, 'title': title,'fourkhub_id':fourkhub_id}, function (ret) {
-              if (ret.seasons.length === 1) {
-                //console.log(ret)
-                add_rss_media(title, year, "TV", mediaid, "", ret.seasons[0].num, add_func,fourkhub_id);
-              } else if (ret.seasons.length > 1) {
-                show_rss_seasons_modal(title, year, "TV", mediaid, ret.seasons, add_func);
-              } else {
-                show_fail_modal(title + " 添加RSS订阅失败：未查询到季信息！");
-              }
-            });
-          }
-        });
-      }
+                else {
+                  show_ask_modal("是否确定订阅： " + title + "？", function () {
+                    hide_ask_modal();
+                    const mediaid = Golbal.convert_mediaid(tmdb_id);
+                    //console.log("普通订阅 params:" + "{tmdbid:" + mediaid + ", title:" + title + ", media_type:" + media_type + ", year:" + year +"}")
+                    if (media_type == "MOV" || media_type == "电影" || "MOVIE" == media_type) {
+                      add_rss_media(title, year, media_type, mediaid, "", "", add_func,fourkhub_id);
+                    } else {
+                      ajax_post("get_tvseason_list", {'tmdbid': mediaid, 'title': title,'fourkhub_id':fourkhub_id}, function (ret) {
+                        if (ret.seasons.length === 1) {
+                          //console.log(ret)
+                          add_rss_media(title, year, "TV", mediaid, "", ret.seasons[0].num, add_func,fourkhub_id);
+                        } else if (ret.seasons.length > 1) {
+                          show_rss_seasons_modal(title, year, "TV", mediaid, ret.seasons, add_func);
+                        } else {
+                          show_fail_modal(title + " 添加RSS订阅失败：未查询到季信息！");
+                        }
+                      });
+                    }
+                  });
+                }
+        }
+      });
     }
   }
 
