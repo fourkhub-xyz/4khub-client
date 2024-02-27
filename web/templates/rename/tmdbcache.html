@@ -1,4 +1,15 @@
 {% import 'macro/svg.html' as SVG %}
+<script type="text/javascript">
+    $(document).ready(function(){
+        var links = document.getElementsByName("index_name")
+        for (var i of links){
+            var text = i.textContent
+            if (text.length > 40){
+                i.textContent = text.substring(0,40) + "..."
+            }
+        }
+    });
+</script>
 <div class="container-xl">
   <!-- Page title -->
   <div class="page-header d-print-none">
@@ -68,7 +79,7 @@
                           {% endif %}
                         </span>
                         <div class="flex-fill">
-                          <div class="font-weight-medium">{{ TmdbCache[2] }}</div>
+                          <div class="font-weight-medium" name="index_name">{{ TmdbCache[2] }}</div>
                         </div>
                       </div>
                     </td>
