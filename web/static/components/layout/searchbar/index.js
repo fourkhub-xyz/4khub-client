@@ -242,6 +242,7 @@ export class LayoutSearchbar extends CustomElement {
                     : nothing }
                   `
                 : nothing }
+                  <a href="javascript:signin()" class="dropdown-item">每日签到</a>
                   <a href="javascript:navmenu('help')" class="dropdown-item">帮助文档</a>
                 <a href="javascript:logout()" class="dropdown-item">
                   注销 <span class="text-muted mx-3">${this.layout_username}</span>
