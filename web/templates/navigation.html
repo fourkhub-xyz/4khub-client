@@ -2443,6 +2443,16 @@
         console.log(url)
         navmenu(url)
     }
+  function signin(e){
+      //e.stopPropagation();
+      ajax_post("signin",{},function (ret){
+        if(ret.status === 0){
+            show_fail_modal(ret.msg);
+        }else {
+            show_success_modal(ret.msg);
+        }
+      })
+  }
   //导航点击
   function navmenu(page, newflag=false) {
     if (!newflag) {
