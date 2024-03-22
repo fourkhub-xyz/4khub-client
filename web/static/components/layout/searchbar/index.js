@@ -243,6 +243,7 @@ export class LayoutSearchbar extends CustomElement {
                   `
                 : nothing }
                   <a href="javascript:signin()" class="dropdown-item">每日签到</a>
+                  <a href="https://bbs.4khub.xyz/" target="_blank" title="遇到问题可到社区求助" class="dropdown-item">官方社区</a>
                   <a href="javascript:navmenu('help')" class="dropdown-item">帮助文档</a>
                 <a href="javascript:logout()" class="dropdown-item">
                   注销 <span class="text-muted mx-3">${this.layout_username}</span>
